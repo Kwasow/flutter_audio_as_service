@@ -1,14 +1,9 @@
-# flutter_audio_as_service
+# flutter_audio_as_service 0.0.1
 
-A new flutter plugin project.
 
-## Getting Started
+Flutter plugin for audio playback on Android
+Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
+Licensed under [add licence]
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Usage

@@ -1,3 +1,9 @@
+//
+//  Flutter plugin for audio playback on Android
+//  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
+//  Licensed under [add licence]
+//
+
 package net.tailosive.flutter_audio_as_service;
 
 import io.flutter.plugin.common.MethodCall;
@@ -5,6 +11,8 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+
+import AudioService.java;
 
 /** FlutterAudioAsServicePlugin */
 public class FlutterAudioAsServicePlugin implements MethodCallHandler {
@@ -16,10 +24,30 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("returnText")) {
-      result.success("Work in progress");
+    
+    if (call.method.equals('loadAudio')) {
+      
     } else {
-      result.notImplemented();
+      result.notImplemente();
     }
+
+    if (call.method.equals('playAudio')) {
+      
+    } else {
+      result.notImplemente();
+    }
+
+    if (call.method.equals('pauseAudio')) {
+      
+    } else {
+      result.notImplemente();
+    }
+
+    if (call.method.equals('stopAudio')) {
+      
+    } else {
+      result.notImplemente();
+    }
+
   }
 }

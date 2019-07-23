@@ -46,21 +46,31 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               RaisedButton(
                 child: Text("Load audio"),
-                onPressed: () {},
+                onPressed: () async {
+                  await FlutterAudioAsService.loadAudio(
+                    "https://feeds.soundcloud.com/stream/655083446-tailosivecast-ep-054-series-finale.m4a"
+                  );
+                },
               ),
               Row(
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.play_arrow),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await FlutterAudioAsService.playAudio();
+                    },
                   ),
                   IconButton(
                     icon: Icon(Icons.pause),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await FlutterAudioAsService.pauseAudio();
+                    },
                   ),
                   IconButton(
                     icon: Icon(Icons.stop),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await FlutterAudioAsService.stopAudio();
+                    },
                   ),
                 ],
               ),

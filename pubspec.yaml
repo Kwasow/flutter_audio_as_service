@@ -1,8 +1,8 @@
 name: flutter_audio_as_service
-description: A new flutter plugin project.
+description: Flutter plugin for audio playback on Android
 version: 0.0.1
-author:
-homepage:
+author: Karol Wąsowski (karol@tailosive.net)
+homepage: talosive.net
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
