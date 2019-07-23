@@ -12,7 +12,7 @@ class FlutterAudioAsService {
   }
 
   static Future<void> loadAudio(String url) async {
-    await _channel.invokeMethod('loadAudio');
+    await _channel.invokeMethod('loadAudio', url);
   }
 
   static Future<void> playAudio() async {
