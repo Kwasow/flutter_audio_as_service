@@ -14,8 +14,6 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import android.util.Log;
 
-// import AudioService.java;
-
 /** FlutterAudioAsServicePlugin */
 public class FlutterAudioAsServicePlugin implements MethodCallHandler {
   /** Plugin registration. */
@@ -24,28 +22,32 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
     channel.setMethodCallHandler(new FlutterAudioAsServicePlugin());
   }
 
+  AudioService audioService = new AudioService();
+
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     switch (call.method) {
 
       case "loadAudio":
         String url = call.argument("url");
-        Log.i("I/Audio", "Loading " + url);
+        audioService.startService();
+        audioService.loadAudio(url);
         break;
 
       case "playAudio":
-
+        audioService.playAudio();
         break;
 
       case "pauseAudio":
-
+        audioService.pauseAudio();
         break;
 
       case "stopAudio":
-
+        audioService.stopAudio();
         break;
 
       default:
+        Log.e("Audio", "Wrong method call");
         result.notImplemented();
         break;
     }
