@@ -1,5 +1,10 @@
+//
+//  Flutter plugin for audio playback on Android
+//  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
+//  Licensed under GPLv3
+//
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_audio_as_service/flutter_audio_as_service.dart';
 
 void main() => runApp(MyApp());
@@ -15,10 +20,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Android Audio playback as service'),
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
                 child: Text("Load audio"),
@@ -29,6 +35,7 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.play_arrow),
@@ -49,6 +56,12 @@ class _MyAppState extends State<MyApp> {
                     },
                   ),
                 ],
+              ),
+              RaisedButton(
+                child: Text("Seek by 30s"),
+                onPressed: () async {
+                  await FlutterAudioAsService.seekBy(3000);
+                },
               ),
             ],
           ),

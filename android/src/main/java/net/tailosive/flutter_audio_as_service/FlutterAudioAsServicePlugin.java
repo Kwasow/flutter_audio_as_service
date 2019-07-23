@@ -46,6 +46,24 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
         audioService.stopAudio();
         break;
 
+      case "getDuration":
+        result.success(audioService.getDuration());
+        break;
+
+      case "getCurrentPosition":
+        result.success(audioService.getCurrentPosition());
+        break;
+
+      case "seekTo":
+        int positionInMs = call.argument("positionInMs");
+        audioService.seekTo(positionInMs);
+        break;
+      
+      case "seekBy":
+        int seekByInMs = call.argument("seekByInMs");
+        audioService.seekTo(audioService.getCurrentPosition() + seekByInMs);
+        break;
+
       default:
         Log.e("Audio", "Wrong method call");
         result.notImplemented();

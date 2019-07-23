@@ -36,10 +36,12 @@ public class AudioService extends Service {
     }
 
     public void loadAudio(String url) {
+        Log.i("Audio", "Loading...");
         try {
             audioPlayer.setDataSource(url);
             audioPlayer.prepare();
             audioPlayer.start();
+            Log.i("Audio", "Loaded and playing");
         } catch(IOException e) {
 
         }
@@ -47,13 +49,29 @@ public class AudioService extends Service {
 
     public void playAudio() {
         audioPlayer.start();
+        Log.i("Audio", "Play");
     }
 
     public void pauseAudio() {
         audioPlayer.pause();
+        Log.i("Audio", "Paused");
     }
 
     public void stopAudio() {
         audioPlayer.reset();
+        Log.i("Audio", "Source discarded");
+    }
+
+    public int getDuration() {
+        return audioPlayer.getDuration();
+    }
+
+    public int getCurrentPosition() {
+        return audioPlayer.getCurrentPosition();
+    }
+
+    public void seekTo(int positionInMs) {
+        audioPlayer.seekTo(positionInMs);
+        Log.i("Audio", "Seeked to " + positionInMs + "ms");
     }
 }

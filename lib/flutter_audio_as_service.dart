@@ -1,3 +1,9 @@
+//
+//  Flutter plugin for audio playback on Android
+//  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
+//  Licensed under GPLv3
+//
+
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -20,5 +26,22 @@ class FlutterAudioAsService {
 
   static Future<void> stopAudio() async {
     await _channel.invokeMethod('stopAudio');
+  }
+
+  static Future<int> getDuration() async {
+    return await _channel.invokeMethod('getDuration');
+  }
+
+  static Future<int> getCurrentPosition() async {
+    int position = await _channel.invokeMethod('getCurrentPosition');
+    return position;
+  }
+
+  static Future<void> seekTo(int positionInMs) async {
+    await _channel.invokeMethod('seekTo', {"positionInMs": positionInMs});
+  }
+
+  static Future<void> seekBy(int seekByInMs) async {
+    await _channel.invokeMethod('seekBy', {"seekByInMs": seekByInMs});
   }
 }
