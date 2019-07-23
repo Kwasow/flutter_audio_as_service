@@ -10,30 +10,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _result = "Awaiting";
-
-  @override
-  void initState() {
-    super.initState();
-    getTheSomething();
-  }
-
-  Future<void> getTheSomething() async {
-    String result;
-
-    try {
-      result = await FlutterAudioAsService.returnText;
-    } on PlatformException {
-      result = "Something went wrong";
-    }
-
-    if (!mounted) return;
-
-    setState(() {
-      _result = result;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

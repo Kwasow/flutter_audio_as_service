@@ -12,7 +12,9 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-import AudioService.java;
+import android.util.Log;
+
+// import AudioService.java;
 
 /** FlutterAudioAsServicePlugin */
 public class FlutterAudioAsServicePlugin implements MethodCallHandler {
@@ -24,30 +26,29 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    
-    if (call.method.equals('loadAudio')) {
-      
-    } else {
-      result.notImplemente();
-    }
+    switch (call.method) {
 
-    if (call.method.equals('playAudio')) {
-      
-    } else {
-      result.notImplemente();
-    }
+      case "loadAudio":
+        String url = call.argument("url");
+        Log.i("I/Audio", "Loading " + url);
+        break;
 
-    if (call.method.equals('pauseAudio')) {
-      
-    } else {
-      result.notImplemente();
-    }
+      case "playAudio":
 
-    if (call.method.equals('stopAudio')) {
-      
-    } else {
-      result.notImplemente();
-    }
+        break;
 
+      case "pauseAudio":
+
+        break;
+
+      case "stopAudio":
+
+        break;
+
+      default:
+        result.notImplemented();
+        break;
+    }
   }
+
 }
