@@ -10,7 +10,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   String _result = "Awaiting";
 
   @override
@@ -43,7 +42,30 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_result\n'),
+          child: Column(
+            children: <Widget>[
+              RaisedButton(
+                child: Text("Load audio"),
+                onPressed: () {},
+              ),
+              Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.play_arrow),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.pause),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.stop),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
