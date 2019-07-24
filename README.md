@@ -5,7 +5,7 @@ Flutter plugin for audio playback on Android
 Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
 Licensed under GPLv3.
 
-Pull requests will not be accepted until version 1.0
+Pull requests are welcome.
 
 
 ## Usage
