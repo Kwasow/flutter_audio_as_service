@@ -7,27 +7,44 @@
 package net.tailosive.flutter_audio_as_service;
 
 import android.app.Service;
-import android.os.Binder;
-import android.os.IBinder;
-import java.util.Timer;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
+import android.view.KeyEvent;
 import java.io.IOException;
 
 public class AudioService extends Service {
     private final IBinder binder = new AudioServiceBinder();
     MediaPlayer audioPlayer;
 
-    public class AudioServiceBinder extends Binder {
-        AudioService getService() {
-            return  AudioService.this;
-        }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_NOT_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d("Audio/service", "onDestroy: ");
+        super.onDestroy();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
+    }
+
+    public class AudioServiceBinder extends Binder {
+        AudioService getService() {
+            return  AudioService.this;
+        }
     }
 
     public void startService() {

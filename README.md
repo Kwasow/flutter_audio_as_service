@@ -10,8 +10,15 @@ Pull requests will not be accepted until version 1.0
 
 ## Usage
 
-1. AndroidManifest.xml
+1. Before you begin
+Add this permission to AndridManifest.xml:
 `<uses-permission android:name="android.permission.WAKE_LOCK" />`
+Make sure your app uses Java8 by adding this code into your app-level build.gradle into the android section:
+`compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+`
 
 2. Media notifiaction
 If you want to use media notification add this to your AndroidManifest.xml:
