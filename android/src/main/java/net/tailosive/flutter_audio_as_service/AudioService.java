@@ -8,87 +8,70 @@ package net.tailosive.flutter_audio_as_service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Binder;
 import android.os.IBinder;
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.media.MediaPlayer;
 import java.io.IOException;
+import android.util.Log;
 
 public class AudioService extends Service {
-    private final IBinder binder = new AudioServiceBinder();
-    MediaPlayer audioPlayer;
+  MediaPlayer audioPlayer;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+  @Override
+  public IBinder onBind(Intent intent) {
+      return null;
+  }
+
+  @Override
+  public int onStartCommand(Intent intent, int flags, int startId) {
+    super.onStartCommand(intent, flags, startId);
+
+    // create a new player
+    audioPlayer = new MediaPlayer();
+    Log.i("Audio", "Service started successfuly");
+    return START_NOT_STICKY;
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+
+    // destroy the player
+    audioPlayer.release();
+  }
+
+  public void loadAudio(String url) {
+    try {
+      audioPlayer.setDataSource(url);
+      audioPlayer.prepare();
+      audioPlayer.start();
+    } catch(IOException e) {
+
     }
+  }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return START_NOT_STICKY;
-    }
+  public void playAudio() {
+    audioPlayer.start();
+  }
 
-    @Override
-    public void onDestroy() {
-        Log.d("Audio/service", "onDestroy: ");
-        super.onDestroy();
-    }
+  public void pauseAudio() {
+    audioPlayer.pause();
+  }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return binder;
-    }
+  public void stopAudio() {
+    audioPlayer.reset();
+    stopSelf();
+  }
 
-    public class AudioServiceBinder extends Binder {
-        AudioService getService() {
-            return  AudioService.this;
-        }
-    }
+  public int getDuration() {
+    return audioPlayer.getDuration();
+  }
 
-    public void startService() {
-        audioPlayer = new MediaPlayer();
-        Log.i("Audio", "Service started successfuly");
-    }
+  public int getCurrentPosition() {
+    return audioPlayer.getCurrentPosition();
+  }
 
-    public void loadAudio(String url) {
-        Log.i("Audio", "Loading...");
-        try {
-            audioPlayer.setDataSource(url);
-            audioPlayer.prepare();
-            audioPlayer.start();
-            Log.i("Audio", "Loaded and playing");
-        } catch(IOException e) {
-
-        }
-    }
-
-    public void playAudio() {
-        audioPlayer.start();
-        Log.i("Audio", "Play");
-    }
-
-    public void pauseAudio() {
-        audioPlayer.pause();
-        Log.i("Audio", "Paused");
-    }
-
-    public void stopAudio() {
-        audioPlayer.reset();
-        Log.i("Audio", "Source discarded");
-    }
-
-    public int getDuration() {
-        return audioPlayer.getDuration();
-    }
-
-    public int getCurrentPosition() {
-        return audioPlayer.getCurrentPosition();
-    }
-
-    public void seekTo(int positionInMs) {
-        audioPlayer.seekTo(positionInMs);
-        Log.i("Audio", "Seeked to " + positionInMs + "ms");
-    }
+  public void seekTo(int positionInMs) {
+    audioPlayer.seekTo(positionInMs);
+    Log.i("Audio", "Seeked to " + positionInMs + "ms");
+  }
 }

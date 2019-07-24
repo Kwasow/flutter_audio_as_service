@@ -14,11 +14,23 @@ Pull requests will not be accepted until version 1.0
 Add this permission to AndridManifest.xml:
 `<uses-permission android:name="android.permission.WAKE_LOCK" />`
 Make sure your app uses Java8 by adding this code into your app-level build.gradle into the android section:
-`compileOptions {
+```compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-`
+```
+Enable androidx support in your app.
+Add the service to AndroidMainfest.xml
+```
+<manifest>
+  ...
+  <application>
+    ...
+    ...
+    <service android:name="net.tailosive.flutter_audio_as_service.AudioService"/>
+  </application>
+</manifest>
+```
 
 2. Media notifiaction
 If you want to use media notification add this to your AndroidManifest.xml:

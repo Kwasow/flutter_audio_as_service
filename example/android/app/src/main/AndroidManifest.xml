@@ -32,8 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <service android:enabled="true" android:exported="true" android:name="net.tailosive.flutter_audio_as_service_example.AudioService" />
-
+        <service android:name="net.tailosive.flutter_audio_as_service.AudioService"/>
     </application>
 </manifest>
