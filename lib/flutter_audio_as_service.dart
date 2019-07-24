@@ -12,6 +12,10 @@ class FlutterAudioAsService {
   static const MethodChannel _channel =
       const MethodChannel('flutter_audio_as_service');
 
+  static Future<void> init() async {
+    await _channel.invokeMethod('connect');
+  }
+
   static Future<void> loadAudio(String url) async {
     await _channel.invokeMethod('loadAudio', {"url": url});
   }

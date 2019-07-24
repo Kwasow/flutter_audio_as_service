@@ -27,6 +27,12 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
+                child: Text("Connect to service"),
+                onPressed: () async {
+                  await FlutterAudioAsService.init();
+                },
+              ),
+              RaisedButton(
                 child: Text("Load audio"),
                 onPressed: () async {
                   await FlutterAudioAsService.loadAudio(
