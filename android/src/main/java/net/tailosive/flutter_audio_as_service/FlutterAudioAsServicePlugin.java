@@ -6,6 +6,7 @@
 
 package net.tailosive.flutter_audio_as_service;
 
+import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -16,15 +17,20 @@ import android.util.Log;
 import android.content.Context;
 import android.content.Intent;
 import android.app.Service;
-import android.app.Activity;
+import android.os.Bundle;
 
 /** FlutterAudioAsServicePlugin */
-public class FlutterAudioAsServicePlugin extends Activity implements MethodCallHandler {
+public class FlutterAudioAsServicePlugin extends FlutterActivity implements MethodCallHandler {
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_audio_as_service");
     channel.setMethodCallHandler(new FlutterAudioAsServicePlugin());
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
   }
 
   AudioService audioService;
@@ -34,9 +40,8 @@ public class FlutterAudioAsServicePlugin extends Activity implements MethodCallH
     switch (call.method) {
 
       case "startService":
-        Intent serviceIntent = new Intent();
-        serviceIntent.setAction("net.tailosive.flutter_audio_as_service.AudioService");
-        FlutterAudioAsServicePlugin.this.startService(serviceIntent);
+        Intent serviceIntent = new Intent(FlutterAudioAsServicePlugin.this, AudioService.class);
+        startService(new Intent(serviceIntent));
         break;
 
       case "loadAudio":

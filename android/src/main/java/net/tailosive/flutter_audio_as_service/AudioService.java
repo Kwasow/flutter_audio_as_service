@@ -28,7 +28,7 @@ public class AudioService extends Service {
     // create a new player
     audioPlayer = new MediaPlayer();
     Log.i("Audio", "Service started successfuly");
-    return START_NOT_STICKY;
+    return START_STICKY;
   }
 
   @Override
