@@ -7,6 +7,7 @@
 package net.tailosive.flutter_audio_as_service;
 
 import io.flutter.app.FlutterActivity;
+import io.flutter.view.FlutterView;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -29,8 +30,12 @@ public class FlutterAudioAsServicePlugin extends FlutterActivity implements Meth
   }
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(Bundle savedInstanceState) {
+    Log.i("Audio", "onCreate() started");
+
     super.onCreate(savedInstanceState);
+
+    Log.i("Audio", "onCreate() done");
   }
 
   AudioService audioService;
@@ -40,7 +45,7 @@ public class FlutterAudioAsServicePlugin extends FlutterActivity implements Meth
     switch (call.method) {
 
       case "startService":
-        Intent serviceIntent = new Intent(FlutterAudioAsServicePlugin.this, AudioService.class);
+        Intent serviceIntent = new Intent(getFlutterView().getContext(), AudioService.class);
         startService(new Intent(serviceIntent));
         break;
 
