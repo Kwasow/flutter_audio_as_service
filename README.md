@@ -1,8 +1,7 @@
 # flutter_audio_as_service 0.0.1
 
 
-Flutter plugin for audio playback on Android
-Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
+A plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
 Licensed under GPLv3.
 
 Pull requests are welcome.
@@ -31,10 +30,28 @@ Add the service to AndroidMainfest.xml
     ...
     ...
     <service 
-      android:name=".AudioService"
-      android:process="your.app.name.AudioService"
-      android:enabled="true"
-      android:exported="true"/>
+      android:name="net.tailosive.flutter_audio_as_service.AudioService"/>
   </application>
 </manifest>
 ```
+
+2. Usage
+To start playback initialize the player with the following:
+```
+FlutterAudioAsService.init("Title", "Author", audioSource);
+```
+audioSource is a string - could be both a url or a file directory.
+
+Playback is controlled with the following functions:
+```
+FlutterAudioAsService.pause();
+FlutterAudioAsService.resume();
+```
+
+To stop playback and destroy the service run:
+```
+FlutterAudioAsService.stop();
+```
+
+3. Features
+The plugin supports audio playback as an Android service with caching functionality included. It uses ExoPlayer with MediaSession API and rich notification controls.
