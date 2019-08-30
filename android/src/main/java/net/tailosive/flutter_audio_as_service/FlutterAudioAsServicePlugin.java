@@ -52,13 +52,13 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
 
             serviceIntent = new Intent(context, AudioService.class);
 
-            if (isValidDrawableResource(pluginRegistrar.context(), smallIcon, result, "INVALID_ICON")) {
+            if (isValidDrawableResource(pluginRegistrar.context(), smallIcon)) {
               serviceIntent.putExtra("appIcon", smallIcon);
             } else {
               serviceIntent.putExtra("appIcon", (String) null);
             }
 
-            if (isValidDrawableResource(pluginRegistrar.context(), bigIcon, result, "INVALID_ICON")) {
+            if (isValidDrawableResource(pluginRegistrar.context(), bigIcon)) {
               serviceIntent.putExtra("bigIcon", bigIcon);
             } else {
               serviceIntent.putExtra("bigIcon", (String) null);
@@ -72,13 +72,13 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         } else {
           serviceIntent = new Intent(context, AudioService.class);
 
-          if (isValidDrawableResource(pluginRegistrar.context(), smallIcon, result, "INVALID_ICON")) {
+          if (isValidDrawableResource(pluginRegistrar.context(), smallIcon)) {
             serviceIntent.putExtra("appIcon", smallIcon);
           } else {
             serviceIntent.putExtra("appIcon", (String) null);
           }
 
-          if (isValidDrawableResource(pluginRegistrar.context(), bigIcon, result, "INVALID_ICON")) {
+          if (isValidDrawableResource(pluginRegistrar.context(), bigIcon)) {
             serviceIntent.putExtra("bigIcon", bigIcon);
           } else {
             serviceIntent.putExtra("bigIcon", (String) null);
@@ -138,10 +138,9 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
     }
   }
 
-  private static boolean isValidDrawableResource(Context context, String name, Result result, String errorCode) {
+  private static boolean isValidDrawableResource(Context context, String name) {
       int resourceId = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
       if (resourceId == 0) {
-          result.error(errorCode, String.format("INVALID_DRAWABLE_RESOURCE_ERROR_MESSAGE", name), null);
           return false;
       }
       return true;

@@ -1,6 +1,6 @@
 name: flutter_audio_as_service
 description: A plugin, that allows audio playback as Android service.
-version: 0.0.1
+version: 0.0.3
 author: Tailosive Development
 homepage:
 
