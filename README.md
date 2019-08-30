@@ -13,7 +13,9 @@ The plugin is Android only as of now.
 
 1. Before you begin
 Add this permission to AndridManifest.xml:
+```xml
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+```
 
 Make sure your app uses Java8 by adding this code into your app-level build.gradle into the android section:
 ```gradle
