@@ -9,9 +9,10 @@ import 'package:flutter/services.dart';
 
 class FlutterAudioAsService {
   static const MethodChannel nativeChannel =
-  const MethodChannel("AudioService");
+      const MethodChannel("AudioService");
 
-  static Future<void> init(String title, String channel, String url, String albumCover, String appIcon) async {
+  static Future<void> init(String title, String channel, String url,
+      String albumCover, String appIcon) async {
     String checkIfNull(String toCheck) {
       if (toCheck == null) {
         return "theGivenResourceIsNull";
