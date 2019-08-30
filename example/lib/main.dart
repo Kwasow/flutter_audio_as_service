@@ -1,7 +1,7 @@
 //
 //  Flutter plugin for audio playback on Android
 //  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
-//  Licensed under GPLv3
+//  Licensed under the BSD License
 //
 
 import 'package:flutter/material.dart';
@@ -33,8 +33,8 @@ class _MyAppState extends State<MyApp> {
                     "Title",
                     "Author",
                     "https://feeds.soundcloud.com/stream/655083446-tailosivecast-ep-054-series-finale.m4a",
-                    "image/ic_launcher", // looks for assets/image/ic_launcher.png
-                    "app_icon",
+                    "ic_launcher",  // IMPORTANT!
+                    "app_icon",     // see README for details about usage
                   );
                 },
               ),

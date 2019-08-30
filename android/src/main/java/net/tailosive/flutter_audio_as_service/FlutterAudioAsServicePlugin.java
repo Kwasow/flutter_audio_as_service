@@ -1,7 +1,7 @@
 //
 //  Flutter plugin for audio playback on Android
 //  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
-//  Licensed under GPLv3
+//  Licensed under the BSD License
 //
 
 package net.tailosive.flutter_audio_as_service;
@@ -14,12 +14,7 @@ import io.flutter.plugin.common.PluginRegistry;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
-
-import java.io.IOException;
 
 import static net.tailosive.flutter_audio_as_service.AudioService.runningService;
 
@@ -43,11 +38,13 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
     switch (call.method) {
 
       case "startService":
+        // this really needs some work - it's to long as of now
+
         String title = call.argument("title");
         String channel = call.argument("channel");
         String url = call.argument("url");
-        String defaulIcon = call.argument("appIcon");
-        System.out.println(defaulIcon);
+        String smallIcon = call.argument("appIcon");
+        String bigIcon = call.argument("albumCover");
 
         if (!(runningService == null)) {
           if (!(runningService.getUrlPlaying() == url)) {
@@ -55,10 +52,16 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
 
             serviceIntent = new Intent(context, AudioService.class);
 
-            if (isValidDrawableResource(pluginRegistrar.context(), defaulIcon, result, "INVALID_ICON")) {
-              serviceIntent.putExtra("appIcon", defaulIcon);
+            if (isValidDrawableResource(pluginRegistrar.context(), smallIcon, result, "INVALID_ICON")) {
+              serviceIntent.putExtra("appIcon", smallIcon);
             } else {
               serviceIntent.putExtra("appIcon", (String) null);
+            }
+
+            if (isValidDrawableResource(pluginRegistrar.context(), bigIcon, result, "INVALID_ICON")) {
+              serviceIntent.putExtra("bigIcon", bigIcon);
+            } else {
+              serviceIntent.putExtra("bigIcon", (String) null);
             }
 
             serviceIntent.putExtra("title", title);
@@ -69,10 +72,16 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         } else {
           serviceIntent = new Intent(context, AudioService.class);
 
-          if (isValidDrawableResource(pluginRegistrar.context(), defaulIcon, result, "INVALID_ICON")) {
-            serviceIntent.putExtra("appIcon", defaulIcon);
+          if (isValidDrawableResource(pluginRegistrar.context(), smallIcon, result, "INVALID_ICON")) {
+            serviceIntent.putExtra("appIcon", smallIcon);
           } else {
             serviceIntent.putExtra("appIcon", (String) null);
+          }
+
+          if (isValidDrawableResource(pluginRegistrar.context(), bigIcon, result, "INVALID_ICON")) {
+            serviceIntent.putExtra("bigIcon", bigIcon);
+          } else {
+            serviceIntent.putExtra("bigIcon", (String) null);
           }
 
           serviceIntent.putExtra("title", title);

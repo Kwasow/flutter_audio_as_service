@@ -1,24 +1,31 @@
 //
 //  Flutter plugin for audio playback on Android
 //  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
-//  Licensed under GPLv3
+//  Licensed under the BSD License
 //
 
 import 'dart:async';
 import 'package:flutter/services.dart';
-
 
 class FlutterAudioAsService {
   static const MethodChannel nativeChannel =
   const MethodChannel("AudioService");
 
   static Future<void> init(String title, String channel, String url, String albumCover, String appIcon) async {
+    String checkIfNull(String toCheck) {
+      if (toCheck == null) {
+        return "theGivenResourceIsNull";
+      } else {
+        return toCheck;
+      }
+    }
+
     await nativeChannel.invokeMethod("startService", {
       "title": title,
       "channel": channel,
       "url": url,
-      "albumCover": albumCover,
-      "appIcon": appIcon,
+      "albumCover": checkIfNull(albumCover),
+      "appIcon": checkIfNull(appIcon),
     });
   }
 

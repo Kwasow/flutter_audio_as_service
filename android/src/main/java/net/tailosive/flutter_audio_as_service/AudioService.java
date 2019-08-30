@@ -1,7 +1,7 @@
 //
 //  Flutter plugin for audio playback on Android
 //  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
-//  Licensed under GPLv3
+//  Licensed under the BSD License
 //
 
 package net.tailosive.flutter_audio_as_service;
@@ -11,13 +11,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.IBinder;
-import android.os.Handler;
 import android.support.v4.media.session.MediaSessionCompat;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -131,7 +128,20 @@ public class AudioService extends Service {
                     @Nullable
                     @Override
                     public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
-                        return null;
+                        if (intent.getStringExtra("bigIcon") == null) {
+                            return null;
+                        } else {
+                            int resourceId = pluginRegistrar.context().getResources().getIdentifier(
+                                    intent.getStringExtra("bigIcon"),
+                                    "drawable",
+                                    pluginRegistrar.context().getPackageName());
+                            Bitmap bigIconBitmap = BitmapFactory.decodeResource(
+                                    pluginRegistrar.context().getResources(),
+                                    resourceId
+                            );
+                            return bigIconBitmap;
+
+                        }
                     }
                 },
                 new PlayerNotificationManager.NotificationListener() {
