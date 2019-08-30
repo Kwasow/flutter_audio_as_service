@@ -12,11 +12,13 @@ class FlutterAudioAsService {
   static const MethodChannel nativeChannel =
   const MethodChannel("AudioService");
 
-  static Future<void> init(String title, String channel, String url) async {
+  static Future<void> init(String title, String channel, String url, String albumCover, String appIcon) async {
     await nativeChannel.invokeMethod("startService", {
       "title": title,
       "channel": channel,
       "url": url,
+      "albumCover": albumCover,
+      "appIcon": appIcon,
     });
   }
 

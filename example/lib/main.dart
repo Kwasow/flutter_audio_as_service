@@ -33,6 +33,8 @@ class _MyAppState extends State<MyApp> {
                     "Title",
                     "Author",
                     "https://feeds.soundcloud.com/stream/655083446-tailosivecast-ep-054-series-finale.m4a",
+                    "image/ic_launcher", // looks for assets/image/ic_launcher.png
+                    "app_icon",
                   );
                 },
               ),

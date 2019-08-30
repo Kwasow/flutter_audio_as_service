@@ -6,6 +6,8 @@ Licensed under GPLv3.
 
 Pull requests are welcome.
 
+The plugin is Android only as of now.
+
 
 ## Usage
 
@@ -14,16 +16,17 @@ Add this permission to AndridManifest.xml:
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
 Make sure your app uses Java8 by adding this code into your app-level build.gradle into the android section:
-```compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+```gradle
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
 ```
 
 Enable androidx support in your app.
 
 Add the service to AndroidMainfest.xml
-```
+```xml
 <manifest>
   ...
   <application>
@@ -37,19 +40,27 @@ Add the service to AndroidMainfest.xml
 
 2. Usage
 To start playback initialize the player with the following:
-```
-FlutterAudioAsService.init("Title", "Author", audioSource);
+```dart
+FlutterAudioAsService.init("Title", "Author", audioSource, appIcon);
 ```
 audioSource is a string - could be both a url or a file directory.
+albumCover is a string - the name (path) to image asset
+appIcon - sets the small notification icon
 
 Playback is controlled with the following functions:
-```
+```dart
 FlutterAudioAsService.pause();
 FlutterAudioAsService.resume();
 ```
 
-To stop playback and destroy the service run:
+During playback you may also seek with:
+```dart
+FlutterAudioAsService.seekBy(Duration(seconds: 30));
+FlutterAudioAsService.seekTo(Duration(minutes: 15, seconds: 47));
 ```
+
+To stop playback and destroy the service run:
+```dart
 FlutterAudioAsService.stop();
 ```
 

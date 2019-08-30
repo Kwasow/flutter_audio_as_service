@@ -11,8 +11,10 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.Handler;
@@ -38,6 +40,8 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 
+import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.pluginRegistrar;
+
 public class AudioService extends Service {
     Context context = this;
     public static AudioService runningService;
@@ -60,7 +64,7 @@ public class AudioService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(final Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
 
         runningService = this;
@@ -74,7 +78,7 @@ public class AudioService extends Service {
 
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
                 context,
-                Util.getUserAgent(context, "Tailosive"));
+                Util.getUserAgent(context, "TailosivePlugin"));
 
         CacheDataSourceFactory cacheDataSourceFactory = new CacheDataSourceFactory(getCache(this), dataSourceFactory);
         MediaSource audioSource = new ProgressiveMediaSource.Factory(cacheDataSourceFactory)
@@ -127,11 +131,7 @@ public class AudioService extends Service {
                     @Nullable
                     @Override
                     public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
-                        if (channel.equals("Tailosive Tech")) {
-                            return BitmapFactory.decodeResource(getResources(), R.drawable.ptech);
-                        } else {
-                            return BitmapFactory.decodeResource(getResources(), R.drawable.ptalks);
-                        }
+                        return null;
                     }
                 },
                 new PlayerNotificationManager.NotificationListener() {
@@ -147,7 +147,13 @@ public class AudioService extends Service {
                 }
         );
 
-        playerNotificationManager.setSmallIcon(R.drawable.app_icon);
+        if (!(intent.getStringExtra("appIcon") == null)) {
+            playerNotificationManager.setSmallIcon(pluginRegistrar.context().getResources().getIdentifier(
+                    intent.getStringExtra("appIcon"),
+                    "drawable",
+                    pluginRegistrar.context().getPackageName()
+            ));
+        }
         playerNotificationManager.setUseStopAction(true);
         playerNotificationManager.setRewindIncrementMs(30000);  // 30s
         playerNotificationManager.setFastForwardIncrementMs(30000);
@@ -216,9 +222,9 @@ public class AudioService extends Service {
         return nowPlayingUrl;
     }
 
-    public long getPlayerAudioLength() {
-        return player.getDuration();
-    }
+    // public long getPlayerAudioLength() {
+    //    return player.getDuration();
+    //}
 
     public void seekBy(int seekByInMs) {
         player.seekTo(player.getCurrentPosition() + seekByInMs);
