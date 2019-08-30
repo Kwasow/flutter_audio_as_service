@@ -52,6 +52,23 @@ How to properly set appIcon and albumCover:
   - if your resource is app_icon.png then set the appIcon value to be "app_icon"
   - the value can be null
 
+If you wish you can set event listeners as follows:
+```dart
+AudioPlayerListener listener = AudioPlayerListener(
+  onPlayerStateChanged: (PlayerState playerState) {
+    print(playerState);
+  },
+  onPlayerPositionChanged: (Duration playerPosition) {
+    print(playerPosition.toString());
+  },
+  onPlayerCompleted: () {
+    print("Player completed");
+  }
+);
+
+FlutterAudioAsService.setListeners(listener);
+```
+
 Playback is controlled with the following functions:
 ```dart
 FlutterAudioAsService.pause();

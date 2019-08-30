@@ -1,3 +1,7 @@
+## 0.0.4
+
+Added listeners to player state changes, audio position changes and audio completed playing. This will be released as 0.1.0 after some testing.
+
 ## 0.0.3
 
 Adds missing feature - set notification album cover, and makes the plugin release-ready (beta)

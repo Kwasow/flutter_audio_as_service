@@ -15,6 +15,43 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Duration audioLength = Duration(milliseconds: 0);
+  Duration audioPosition = Duration(milliseconds: 0);
+
+  Future<void> setAudioLength() async {
+    audioLength = Duration(milliseconds: await FlutterAudioAsService.getAudioLength());
+    setState(() {
+      
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    AudioPlayerListener listener = AudioPlayerListener(
+      onPlayerStateChanged: (PlayerState playerState) {
+        if (playerState == PlayerState.idle) {
+          setState(() {
+            audioLength = Duration(milliseconds: 0);
+          });
+        } else {
+          setAudioLength();
+        }
+      },
+      onPlayerPositionChanged: (Duration playerPosition) {
+        setState(() {
+          audioPosition = playerPosition;
+        });
+      },
+      onPlayerCompleted: () {
+        print("Player completed");
+      }
+    );
+
+    FlutterAudioAsService.setListeners(listener);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,6 +73,9 @@ class _MyAppState extends State<MyApp> {
                     "ic_launcher",  // IMPORTANT!
                     "app_icon",     // see README for details about usage
                   );
+                  setState(() {
+
+                  });
                 },
               ),
               Row(
@@ -67,6 +107,8 @@ class _MyAppState extends State<MyApp> {
                   await FlutterAudioAsService.seekBy(Duration(seconds: 30));
                 },
               ),
+              Text("Audio length: " + audioLength.toString()),
+              Text("Player progress: " + audioPosition.toString() + " / " + audioLength.toString()),
             ],
           ),
         ),

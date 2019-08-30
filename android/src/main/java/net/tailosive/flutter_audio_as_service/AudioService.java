@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.media.session.MediaSessionCompat;
 
@@ -37,215 +38,232 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 
+import io.flutter.plugin.common.MethodChannel;
+
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.pluginRegistrar;
+import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.channel;
 
 public class AudioService extends Service {
-    Context context = this;
-    public static AudioService runningService;
-    // private Handler handler;
+  Context context = this;
+  public static AudioService runningService;
+  private Handler handler;
+  MethodChannel methodChannel = channel;
 
-    private static Cache cache;
-    public SimpleExoPlayer player;
-    private PlayerNotificationManager playerNotificationManager;
-    private String PLAYBACK_CHANNEL_ID = "playback channel";
-    private int PLAYBACK_NOTIFICATION_ID = 1;
-    MediaSessionCompat mediaSession;
-    private String MEDIA_SESSION_TAG = "AudioPlaybackSession";
-    MediaSessionConnector mediaSessionConnector;
+  private static Cache cache;
+  public SimpleExoPlayer player;
+  private PlayerNotificationManager playerNotificationManager;
+  private String PLAYBACK_CHANNEL_ID = "playback channel";
+  private int PLAYBACK_NOTIFICATION_ID = 1;
+  MediaSessionCompat mediaSession;
+  private String MEDIA_SESSION_TAG = "AudioPlaybackSession";
+  MediaSessionConnector mediaSessionConnector;
 
-    private String nowPlayingUrl;
+  private String nowPlayingUrl;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+  }
 
-    @Override
-    public int onStartCommand(final Intent intent, int flags, int startId) {
-        super.onStartCommand(intent, flags, startId);
+  @Override
+  public int onStartCommand(final Intent intent, int flags, int startId) {
+    super.onStartCommand(intent, flags, startId);
 
-        runningService = this;
+    runningService = this;
 
-        final String title = intent.getStringExtra("title");
-        final String channel = intent.getStringExtra("channel");
-        final String url = intent.getStringExtra("url");
-        nowPlayingUrl = url;
+    final String title = intent.getStringExtra("title");
+    final String channel = intent.getStringExtra("channel");
+    final String url = intent.getStringExtra("url");
+    nowPlayingUrl = url;
 
-        player = ExoPlayerFactory.newSimpleInstance(context, new DefaultTrackSelector());
+    player = ExoPlayerFactory.newSimpleInstance(context, new DefaultTrackSelector());
 
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
-                context,
-                Util.getUserAgent(context, "TailosivePlugin"));
+    DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
+            context,
+            Util.getUserAgent(context, "TailosivePlugin"));
 
-        CacheDataSourceFactory cacheDataSourceFactory = new CacheDataSourceFactory(getCache(this), dataSourceFactory);
-        MediaSource audioSource = new ProgressiveMediaSource.Factory(cacheDataSourceFactory)
-                .createMediaSource(Uri.parse(url));
-/*
-        SimpleExoPlayer.EventListener audioEventListener = new SimpleExoPlayer.EventListener() {
-            @Override
-            public int hashCode() {
-                return super.hashCode();
-            }
+    CacheDataSourceFactory cacheDataSourceFactory = new CacheDataSourceFactory(getCache(this), dataSourceFactory);
+    MediaSource audioSource = new ProgressiveMediaSource.Factory(cacheDataSourceFactory)
+            .createMediaSource(Uri.parse(url));
 
-            @Override
-            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-                mainActivity.onPlayerStateChanged(playWhenReady, playbackState);
-            }
-        };
+    SimpleExoPlayer.EventListener audioEventListener = new SimpleExoPlayer.EventListener() {
+      @Override
+      public int hashCode() {
+        return super.hashCode();
+      }
 
-        player.addListener(audioEventListener); */
-        player.prepare(audioSource);
-        player.setPlayWhenReady(true);
+      @Override
+      public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+        if (playbackState == SimpleExoPlayer.STATE_IDLE) {
+          methodChannel.invokeMethod("onPlayerStateChanged", "idle");
+        } else if (playbackState == SimpleExoPlayer.STATE_BUFFERING) {
+          methodChannel.invokeMethod("onPlayerStateChanged", "buffering");
+          // add buffering string
+        } else if (playbackState == SimpleExoPlayer.STATE_ENDED) {
+          methodChannel.invokeMethod("onPlayerCompleted", null);
+        } else if (playWhenReady) {
+          methodChannel.invokeMethod("onPlayerStateChanged", "playing");
+          // add playing
+        } else {
+          methodChannel.invokeMethod("onPlayerStateChanged", "paused");
+          // add paused
+        }
+      }
+    };
 
-        playerNotificationManager = PlayerNotificationManager.createWithNotificationChannel(
-                context,
-                PLAYBACK_CHANNEL_ID,
-                R.string.playback_channel_name,
-                R.string.channel_description,
-                PLAYBACK_NOTIFICATION_ID,
-                new PlayerNotificationManager.MediaDescriptionAdapter() {
-                    @Override
-                    public String getCurrentContentTitle(Player player) {
-                        return title;
-                    }
+    player.addListener(audioEventListener);
+    player.prepare(audioSource);
+    player.setPlayWhenReady(true);
 
-                    @Nullable
-                    @Override
-                    public PendingIntent createCurrentContentIntent(Player player) {
+    playerNotificationManager = PlayerNotificationManager.createWithNotificationChannel(
+            context,
+            PLAYBACK_CHANNEL_ID,
+            R.string.playback_channel_name,
+            R.string.channel_description,
+            PLAYBACK_NOTIFICATION_ID,
+            new PlayerNotificationManager.MediaDescriptionAdapter() {
+              @Override
+              public String getCurrentContentTitle(Player player) {
+                return title;
+              }
+
+              @Nullable
+              @Override
+              public PendingIntent createCurrentContentIntent(Player player) {
                         /*
                         Intent intent = new Intent(context, MainActivity.class);
                         return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                         */
-                        return null;
-                    }
+                return null;
+              }
 
-                    @Nullable
-                    @Override
-                    public String getCurrentContentText(Player player) {
-                        return channel;
-                    }
+              @Nullable
+              @Override
+              public String getCurrentContentText(Player player) {
+                return channel;
+              }
 
-                    @Nullable
-                    @Override
-                    public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
-                        if (intent.getStringExtra("bigIcon") == null) {
-                            return null;
-                        } else {
-                            int resourceId = pluginRegistrar.context().getResources().getIdentifier(
-                                    intent.getStringExtra("bigIcon"),
-                                    "drawable",
-                                    pluginRegistrar.context().getPackageName());
-                            Bitmap bigIconBitmap = BitmapFactory.decodeResource(
-                                    pluginRegistrar.context().getResources(),
-                                    resourceId
-                            );
-                            return bigIconBitmap;
+              @Nullable
+              @Override
+              public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
+                if (intent.getStringExtra("bigIcon") == null) {
+                  return null;
+                } else {
+                  int resourceId = pluginRegistrar.context().getResources().getIdentifier(
+                          intent.getStringExtra("bigIcon"),
+                          "drawable",
+                          pluginRegistrar.context().getPackageName());
+                  Bitmap bigIconBitmap = BitmapFactory.decodeResource(
+                          pluginRegistrar.context().getResources(),
+                          resourceId
+                  );
+                  return bigIconBitmap;
 
-                        }
-                    }
-                },
-                new PlayerNotificationManager.NotificationListener() {
-                    @Override
-                    public void onNotificationCancelled(int notificationId, boolean dismissedByUser) {
-                        stopSelf();
-                    }
-
-                    @Override
-                    public void onNotificationPosted(int notificationId, Notification notification, boolean ongoing) {
-                        startForeground(notificationId, notification);
-                    }
                 }
-        );
+              }
+            },
+            new PlayerNotificationManager.NotificationListener() {
+              @Override
+              public void onNotificationCancelled(int notificationId, boolean dismissedByUser) {
+                stopSelf();
+              }
 
-        if (!(intent.getStringExtra("appIcon") == null)) {
-            playerNotificationManager.setSmallIcon(pluginRegistrar.context().getResources().getIdentifier(
-                    intent.getStringExtra("appIcon"),
-                    "drawable",
-                    pluginRegistrar.context().getPackageName()
-            ));
-        }
-        playerNotificationManager.setUseStopAction(true);
-        playerNotificationManager.setRewindIncrementMs(30000);  // 30s
-        playerNotificationManager.setFastForwardIncrementMs(30000);
-
-        playerNotificationManager.setPlayer(player);
-
-        mediaSession = new MediaSessionCompat(
-                context,
-                MEDIA_SESSION_TAG
-        );
-        mediaSession.setActive(true);
-        playerNotificationManager.setMediaSessionToken(mediaSession.getSessionToken());
-        mediaSessionConnector = new MediaSessionConnector(mediaSession);
-
-        mediaSessionConnector.setPlayer(player);
-/*
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!(player == null)) {
-                    if (player.getPlayWhenReady()) {
-                        mainActivity.onAudioPositionChanged(player.getCurrentPosition());
-                    }
-                    handler.postDelayed(this, 500);
-                }
+              @Override
+              public void onNotificationPosted(int notificationId, Notification notification, boolean ongoing) {
+                startForeground(notificationId, notification);
+              }
             }
-        }, 500);
-*/
-        return START_STICKY;
+    );
+
+    if (!(intent.getStringExtra("appIcon") == null)) {
+      playerNotificationManager.setSmallIcon(pluginRegistrar.context().getResources().getIdentifier(
+              intent.getStringExtra("appIcon"),
+              "drawable",
+              pluginRegistrar.context().getPackageName()
+      ));
     }
+    playerNotificationManager.setUseStopAction(true);
+    playerNotificationManager.setRewindIncrementMs(30000);  // 30s
+    playerNotificationManager.setFastForwardIncrementMs(30000);
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    playerNotificationManager.setPlayer(player);
 
-        runningService = null;
-        // handler = null;
+    mediaSession = new MediaSessionCompat(
+            context,
+            MEDIA_SESSION_TAG
+    );
+    mediaSession.setActive(true);
+    playerNotificationManager.setMediaSessionToken(mediaSession.getSessionToken());
+    mediaSessionConnector = new MediaSessionConnector(mediaSession);
 
-        mediaSession.release();
-        mediaSessionConnector.setPlayer(null);
-        playerNotificationManager.setPlayer(null);
-        player.release();
-        player = null;
-    }
+    mediaSessionConnector.setPlayer(player);
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    public void pauseAudio() {
-        player.setPlayWhenReady(false);
-    }
-
-    public void resumeAudio() {
-        player.setPlayWhenReady(true);
-    }
-
-    public void serviceStop() {
-        stopSelf();
-    }
-
-    public String getUrlPlaying() {
-        return nowPlayingUrl;
-    }
-
-    // public long getPlayerAudioLength() {
-    //    return player.getDuration();
-    //}
-
-    public void seekBy(int seekByInMs) {
-        player.seekTo(player.getCurrentPosition() + seekByInMs);
-    }
-
-    @Deprecated
-    public static synchronized Cache getCache(Context context) {
-        if (cache == null) {
-            File cacheDirectory = new File(context.getCacheDir(), "audio");
-            cache = new SimpleCache(cacheDirectory, new LeastRecentlyUsedCacheEvictor(300 * 1024 * 1024));
+    handler = new Handler();
+    handler.postDelayed(new Runnable() {
+        @Override
+        public void run() {
+            if (!(player == null)) {
+                if (player.getPlayWhenReady()) {
+                    methodChannel.invokeMethod("onPlayerPositionChanged", player.getCurrentPosition());
+                }
+                handler.postDelayed(this, 500);
+            }
         }
-        return cache;
+    }, 500);
+
+    return START_STICKY;
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+
+    runningService = null;
+    handler = null;
+
+    mediaSession.release();
+    mediaSessionConnector.setPlayer(null);
+    playerNotificationManager.setPlayer(null);
+    player.release();
+    player = null;
+  }
+
+  @Nullable
+  @Override
+  public IBinder onBind(Intent intent) {
+    return null;
+  }
+
+  public void pauseAudio() {
+    player.setPlayWhenReady(false);
+  }
+
+  public void resumeAudio() {
+    player.setPlayWhenReady(true);
+  }
+
+  public void serviceStop() {
+    stopSelf();
+  }
+
+  public String getUrlPlaying() {
+    return nowPlayingUrl;
+  }
+
+  public long getPlayerAudioLength() {
+    return player.getDuration();
+  }
+
+  public void seekBy(int seekByInMs) {
+    player.seekTo(player.getCurrentPosition() + seekByInMs);
+  }
+
+  @Deprecated
+  private static synchronized Cache getCache(Context context) {
+    if (cache == null) {
+      File cacheDirectory = new File(context.getCacheDir(), "audio");
+      cache = new SimpleCache(cacheDirectory, new LeastRecentlyUsedCacheEvictor(300 * 1024 * 1024));
     }
+    return cache;
+  }
 }

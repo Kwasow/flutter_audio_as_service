@@ -22,10 +22,11 @@ import static net.tailosive.flutter_audio_as_service.AudioService.runningService
 public class FlutterAudioAsServicePlugin implements MethodCallHandler{
   public static PluginRegistry.Registrar pluginRegistrar;
   public static Context context;
+  public static MethodChannel channel;
 
   /** Plugin registration. */
   public static void registerWith(PluginRegistry.Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "AudioService");
+    channel = new MethodChannel(registrar.messenger(), "AudioService");
     channel.setMethodCallHandler(new FlutterAudioAsServicePlugin());
 
     pluginRegistrar = registrar;
@@ -117,15 +118,15 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
 
         result.success(null);
         break;
-/*
+
       case "getAudioLength":
-        if (runningService.player != null) {
-          result.success(runningService.getPlayerAudioLength());
+        if (runningService.player == null) {
+          result.success(1);
         } else {
-          result.success(0);
+          result.success(runningService.getPlayerAudioLength());
         }
         break;
-*/
+
       case "seekTo":
         long seekTo = 0;
         int seekToInMs = call.argument("seekToInMs");
