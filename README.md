@@ -1,8 +1,8 @@
-# flutter_audio_as_service 0.0.1
+# flutter_audio_as_service 0.0.3
 
 
 A plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
-Licensed under GPLv3.
+Licensed under the BSD License
 
 Pull requests are welcome.
 
@@ -41,11 +41,14 @@ Add the service to AndroidMainfest.xml
 2. Usage
 To start playback initialize the player with the following:
 ```dart
-FlutterAudioAsService.init("Title", "Author", audioSource, appIcon);
+FlutterAudioAsService.init("Title", "Author", audioSource, appIcon, albumCover);
 ```
 audioSource is a string - could be both a url or a file directory.
-albumCover is a string - the name (path) to image asset
-appIcon - sets the small notification icon
+
+How to properly set appIcon and albumCover:
+  - put the desired .png image into android/src/main/res/drawable/
+  - if your resource is app_icon.png then set the appIcon value to be "app_icon"
+  - the value can be null
 
 Playback is controlled with the following functions:
 ```dart
