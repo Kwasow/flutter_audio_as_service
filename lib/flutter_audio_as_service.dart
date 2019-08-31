@@ -39,20 +39,23 @@ class FlutterAudioAsService {
             audioListener.onPlayerStateChanged(PlayerState.paused);
             break;
         }
-				break;
-				
-			case "onPlayerPositionChanged":
-				audioListener.onPlayerPositionChanged(Duration(milliseconds: call.arguments));
-				break;
+        break;
 
-			case "onPlayerCompleted":
-				audioListener.onPlayerCompleted();
-				break;
+      case "onPlayerPositionChanged":
+        audioListener
+            .onPlayerPositionChanged(Duration(milliseconds: call.arguments));
+        break;
 
-			default:
-				print("ERROR: method not implemented");
-				break;
+      case "onPlayerCompleted":
+        audioListener.onPlayerCompleted();
+        break;
+
+      default:
+        print("ERROR: method not implemented");
+        break;
     }
+
+    return null;
   }
 
   // invoke native methods
@@ -93,12 +96,12 @@ class FlutterAudioAsService {
     });
   }
 
-  static Future<dynamic> getAudioLength() {
-    dynamic audioLength = nativeChannel.invokeMethod("getAudioLength");
+  static Future<Duration> getAudioLength() async {
+    dynamic audioLength = await nativeChannel.invokeMethod("getAudioLength");
     if (audioLength == null) {
       audioLength = 1000;
     }
-    return audioLength;
+    return Duration(milliseconds: audioLength);
     // returns milliseconds
   }
 
@@ -109,17 +112,16 @@ class FlutterAudioAsService {
   }
 }
 
-enum PlayerState {idle, loading, playing, paused}
+enum PlayerState { idle, loading, playing, paused }
 
 class AudioPlayerListener {
-
   AudioPlayerListener({
     Function onPlayerStateChanged,
     Function onPlayerPositionChanged,
     Function onPlayerCompleted,
-  }) : _onPlayerStateChanged = onPlayerStateChanged,
-       _onPlayerPositionChanged = onPlayerPositionChanged,
-       _onPlayerCompleted = onPlayerCompleted;
+  })  : _onPlayerStateChanged = onPlayerStateChanged,
+        _onPlayerPositionChanged = onPlayerPositionChanged,
+        _onPlayerCompleted = onPlayerCompleted;
 
   final Function _onPlayerStateChanged;
   final Function _onPlayerPositionChanged;

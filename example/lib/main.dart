@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Duration audioPosition = Duration(milliseconds: 0);
 
   Future<void> setAudioLength() async {
-    audioLength = Duration(milliseconds: await FlutterAudioAsService.getAudioLength());
+    audioLength = await FlutterAudioAsService.getAudioLength();
     setState(() {
       
     });

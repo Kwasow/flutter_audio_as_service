@@ -1,7 +1,4 @@
-# flutter_audio_as_service 0.0.3
-
-
-A plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
+A Flutter plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
 Licensed under the BSD License
 
 Pull requests are welcome.
@@ -12,7 +9,7 @@ The plugin is Android only as of now.
 ## Usage
 
 1. Before you begin
-Add this permission to AndridManifest.xml:
+Add this permission to AndroidManifest.xml:
 ```xml
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 ```
