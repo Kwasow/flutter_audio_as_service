@@ -6,9 +6,8 @@ Pull requests are welcome.
 The plugin is Android only as of now.
 
 
-## Usage
+# 1. Before you begin
 
-1. Before you begin
 Add this permission to AndroidManifest.xml:
 ```xml
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
@@ -37,7 +36,8 @@ Add the service to AndroidMainfest.xml
 </manifest>
 ```
 
-2. Usage
+# 2. Usage
+
 To start playback initialize the player with the following:
 ```dart
 FlutterAudioAsService.init("Title", "Author", audioSource, appIcon, albumCover);
@@ -83,5 +83,6 @@ To stop playback and destroy the service run:
 FlutterAudioAsService.stop();
 ```
 
-3. Features
+# 3. Features
+
 The plugin supports audio playback as an Android service with caching functionality included. It uses ExoPlayer with MediaSession API and rich notification controls.
