@@ -70,7 +70,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
             serviceIntent.putExtra("url", url);
             context.startService(serviceIntent);
           } else {
-            System.out.println("This audio is already playing");
+            Log.i("Audio", "This audio is already playing, not starting again");
           }
         } else {
           serviceIntent = new Intent(context, AudioService.class);
@@ -97,26 +97,35 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         break;
 
       case "stop":
-        runningService.serviceStop();
+        if (!(runningService == null)) {
+          runningService.serviceStop();
+        }
 
         result.success(null);
         break;
 
       case "pause":
-        runningService.pauseAudio();
+        if (!(runningService == null)) {
+          runningService.pauseAudio();
+        }
 
         result.success(null);
         break;
 
       case "resume":
-        runningService.resumeAudio();
+        if (!(runningService == null)) {
+          runningService.resumeAudio();
+        }
 
         result.success(null);
         break;
 
       case "seekBy":
         int seekByInMs = call.argument("seekByInMs");
-        runningService.seekBy(seekByInMs);
+
+        if (!(runningService == null)) {
+          runningService.seekBy(seekByInMs);
+        }
 
         result.success(null);
         break;
@@ -132,7 +141,10 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
       case "seekTo":
         long seekTo = 0;
         int seekToInMs = call.argument("seekToInMs");
-        runningService.player.seekTo(seekTo + seekToInMs);
+
+        if (!(runningService == null)) {
+          runningService.player.seekTo(seekTo + seekToInMs);
+        }
 
       default:
         Log.e("Audio", "Wrong method call");
