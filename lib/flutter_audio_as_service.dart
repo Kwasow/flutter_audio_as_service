@@ -98,9 +98,6 @@ class FlutterAudioAsService {
 
   static Future<Duration> getAudioLength() async {
     dynamic audioLength = await nativeChannel.invokeMethod("getAudioLength");
-    if (audioLength == null) {
-      audioLength = 1000;
-    }
     return Duration(milliseconds: audioLength);
     // returns milliseconds
   }

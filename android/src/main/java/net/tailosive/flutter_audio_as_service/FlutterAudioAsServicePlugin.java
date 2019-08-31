@@ -48,7 +48,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         String bigIcon = call.argument("albumCover");
 
         if (!(runningService == null)) {
-          if (!(runningService.getUrlPlaying() == url)) {
+          if (!(url.equals(runningService.getUrlPlaying()))) {
             runningService.serviceStop();
 
             serviceIntent = new Intent(context, AudioService.class);
@@ -69,6 +69,8 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
             serviceIntent.putExtra("channel", channel);
             serviceIntent.putExtra("url", url);
             context.startService(serviceIntent);
+          } else {
+            System.out.println("This audio is already playing");
           }
         } else {
           serviceIntent = new Intent(context, AudioService.class);
@@ -121,7 +123,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
 
       case "getAudioLength":
         if (runningService.player == null) {
-          result.success(1);
+          result.success(0);
         } else {
           result.success(runningService.getPlayerAudioLength());
         }
