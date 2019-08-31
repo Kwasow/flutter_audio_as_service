@@ -1,3 +1,9 @@
+## 0.1.1
+
+ - Prevented running functions on null object references
+ - If player initialized with source that is already playing player won't start over - it will keep playing
+ - getAudioLength() now returns 0 if player is idle
+
 ## 0.1.0
 
 Minor changes, improved consistency
