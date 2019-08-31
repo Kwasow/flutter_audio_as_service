@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the onPlayerPositionChanged method from the AudioPlayerListener class, for the Dart programming language.">
-  <title>onPlayerPositionChanged method - AudioPlayerListener class - flutter_audio_as_service library - Dart API</title>
+  <meta name="description" content="API docs for the hashCode property from the AudioPlayerListener class, for the Dart programming language.">
+  <title>hashCode property - AudioPlayerListener class - flutter_audio_as_service library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -27,9 +27,9 @@
     <li><a href="index.html">flutter_audio_as_service</a></li>
     <li><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></li>
     <li><a href="flutter_audio_as_service/AudioPlayerListener-class.html">AudioPlayerListener</a></li>
-    <li class="self-crumb">onPlayerPositionChanged method</li>
+    <li class="self-crumb">hashCode property</li>
   </ol>
-  <div class="self-name">onPlayerPositionChanged</div>
+  <div class="self-name">hashCode</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="index.html">flutter_audio_as_service</a></li>
       <li><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></li>
       <li><a href="flutter_audio_as_service/AudioPlayerListener-class.html">AudioPlayerListener</a></li>
-      <li class="self-crumb">onPlayerPositionChanged method</li>
+      <li class="self-crumb">hashCode property</li>
     </ol>
     
     <h5>AudioPlayerListener class</h5>
@@ -78,24 +78,47 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">onPlayerPositionChanged</span> method</h1></div>
+      <div><h1><span class="kind-property">hashCode</span> property</h1></div>
 
-    <section class="multi-line-signature">
-      <span class="returntype">dynamic</span>
-            <span class="name ">onPlayerPositionChanged</span>
-(<wbr><span class="parameter" id="onPlayerPositionChanged-param-position"><span class="type-annotation">Duration</span> <span class="parameter-name">position</span></span>)
-      
-    </section>
-    
-    <section class="summary source-code" id="source">
-      <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">onPlayerPositionChanged(Duration position) {
-  if (_onPlayerPositionChanged != null) {
-    _onPlayerPositionChanged(position);
-  }
-}</code></pre>
-    </section>
 
+        <section id="getter">
+        
+        <section class="multi-line-signature">
+          <span class="returntype">int</span>
+                  <span class="name ">hashCode</span>
+          <div class="features">inherited</div>
+</section>
+        
+                <section class="desc markdown">
+          <p>The hash code for this object.</p>
+<p>A hash code is a single integer which represents the state of the object
+that affects <a href="flutter_audio_as_service/AudioPlayerListener/operator_equals.html">operator ==</a> comparisons.</p>
+<p>All objects have hash codes.
+The default hash code represents only the identity of the object,
+the same way as the default <a href="flutter_audio_as_service/AudioPlayerListener/operator_equals.html">operator ==</a> implementation only considers objects
+equal if they are identical (see <code>identityHashCode</code>).</p>
+<p>If <a href="flutter_audio_as_service/AudioPlayerListener/operator_equals.html">operator ==</a> is overridden to use the object state instead,
+the hash code must also be changed to represent that state.</p>
+<p>Hash codes must be the same for objects that are equal to each other
+according to <a href="flutter_audio_as_service/AudioPlayerListener/operator_equals.html">operator ==</a>.
+The hash code of an object should only change if the object changes
+in a way that affects equality.
+There are no further requirements for the hash codes.
+They need not be consistent between executions of the same program
+and there are no distribution guarantees.</p>
+<p>Objects that are not equal are allowed to have the same hash code,
+it is even technically allowed that all instances have the same hash code,
+but if clashes happen too often, it may reduce the efficiency of hash-based
+data structures like <code>HashSet</code> or <code>HashMap</code>.</p>
+<p>If a subclass overrides <a href="flutter_audio_as_service/AudioPlayerListener/hashCode.html">hashCode</a>, it should override the
+<a href="flutter_audio_as_service/AudioPlayerListener/operator_equals.html">operator ==</a> operator as well to maintain consistency.</p>
+        </section>
+                <section class="summary source-code" id="source">
+          <h2><span>Implementation</span></h2>
+          <pre class="language-dart"><code class="language-dart">external int get hashCode;</code></pre>
+        </section>
+</section>
+        
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">

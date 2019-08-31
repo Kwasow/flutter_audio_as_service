@@ -1,3 +1,7 @@
+## 0.1.0
+
+Minor changes, improved consistency
+
 ## 0.0.4
 
 Added listeners to player state changes, audio position changes and audio completed playing. This will be released as 0.1.0 after some testing.

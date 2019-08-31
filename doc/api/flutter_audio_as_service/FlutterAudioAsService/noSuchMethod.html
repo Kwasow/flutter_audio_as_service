@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the init method from the FlutterAudioAsService class, for the Dart programming language.">
-  <title>init method - FlutterAudioAsService class - flutter_audio_as_service library - Dart API</title>
+  <meta name="description" content="API docs for the noSuchMethod method from the FlutterAudioAsService class, for the Dart programming language.">
+  <title>noSuchMethod method - FlutterAudioAsService class - flutter_audio_as_service library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -27,9 +27,9 @@
     <li><a href="index.html">flutter_audio_as_service</a></li>
     <li><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></li>
     <li><a href="flutter_audio_as_service/FlutterAudioAsService-class.html">FlutterAudioAsService</a></li>
-    <li class="self-crumb">init method</li>
+    <li class="self-crumb">noSuchMethod method</li>
   </ol>
-  <div class="self-name">init</div>
+  <div class="self-name">noSuchMethod</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="index.html">flutter_audio_as_service</a></li>
       <li><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService-class.html">FlutterAudioAsService</a></li>
-      <li class="self-crumb">init method</li>
+      <li class="self-crumb">noSuchMethod method</li>
     </ol>
     
     <h5>FlutterAudioAsService class</h5>
@@ -89,35 +89,25 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">init</span> method</h1></div>
+      <div><h1><span class="kind-method">noSuchMethod</span> method</h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-            <span class="name ">init</span>
-(<wbr><span class="parameter" id="init-param-title"><span class="type-annotation">String</span> <span class="parameter-name">title</span>, </span> <span class="parameter" id="init-param-channel"><span class="type-annotation">String</span> <span class="parameter-name">channel</span>, </span> <span class="parameter" id="init-param-url"><span class="type-annotation">String</span> <span class="parameter-name">url</span>, </span> <span class="parameter" id="init-param-albumCover"><span class="type-annotation">String</span> <span class="parameter-name">albumCover</span>, </span> <span class="parameter" id="init-param-appIcon"><span class="type-annotation">String</span> <span class="parameter-name">appIcon</span></span>)
-      
+      <span class="returntype">dynamic</span>
+            <span class="name ">noSuchMethod</span>
+(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+      <div class="features">inherited</div>
+    </section>
+    <section class="desc markdown">
+      <p>Invoked when a non-existent method or property is accessed.</p>
+<p>Classes can override <a href="flutter_audio_as_service/FlutterAudioAsService/noSuchMethod.html">noSuchMethod</a> to provide custom behavior.</p>
+<p>If a value is returned, it becomes the result of the original invocation.</p>
+<p>The default behavior is to throw a <code>NoSuchMethodError</code>.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static Future&lt;void&gt; init(String title, String channel, String url,
-    String albumCover, String appIcon) async {
-  String checkIfNull(String toCheck) {
-    if (toCheck == null) {
-      return &quot;theGivenResourceIsNull&quot;;
-    } else {
-      return toCheck;
-    }
-  }
-
-  await nativeChannel.invokeMethod(&quot;startService&quot;, {
-    &quot;title&quot;: title,
-    &quot;channel&quot;: channel,
-    &quot;url&quot;: url,
-    &quot;albumCover&quot;: checkIfNull(albumCover),
-    &quot;appIcon&quot;: checkIfNull(appIcon),
-  });
-}</code></pre>
+      <pre class="language-dart"><code class="language-dart">@pragma(&quot;vm:entry-point&quot;)
+external dynamic noSuchMethod(Invocation invocation);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
