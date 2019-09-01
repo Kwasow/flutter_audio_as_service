@@ -1,3 +1,10 @@
+## 0.2.0
+
+ - Updated doc
+ - Service is now bound
+ - Fixed not being able to controll service after main app closes
+ - Fixed callbacks not working when main app closed
+
 ## 0.1.3
 
  - Updated documentation

@@ -149,20 +149,6 @@
       </dl>
     </section>
 
-    <section class="summary offset-anchor" id="static-properties">
-      <h2>Static Properties</h2>
-
-      <dl class="properties">
-        <dt id="audioListener" class="property">
-          <span class="name"><a href="flutter_audio_as_service/FlutterAudioAsService/audioListener.html">audioListener</a></span>
-          <span class="signature">&#8596; <a href="flutter_audio_as_service/AudioPlayerListener-class.html">AudioPlayerListener</a></span>         
-        </dt>
-        <dd>
-          
-                  <div class="features">read / write</div>
-</dd>
-      </dl>
-    </section>
 
     <section class="summary offset-anchor" id="static-methods">
       <h2>Static Methods</h2>
@@ -242,26 +228,19 @@ It's important to remove listeners in onDestroy() (not implemented)
 This also runs <code>onPlayerCompleted()</code> to free resources
                   
 </dd>
-      </dl>
-    </section>
-
-    <section class="summary offset-anchor" id="constants">
-      <h2>Constants</h2>
-
-      <dl class="properties">
-        <dt id="nativeChannel" class="constant">
-          <span class="name "><a href="flutter_audio_as_service/FlutterAudioAsService/nativeChannel-constant.html">nativeChannel</a></span>
-          <span class="signature">&#8594; const MethodChannel</span>
+        <dt id="unbind" class="callable">
+          <span class="name"><a href="flutter_audio_as_service/FlutterAudioAsService/unbind.html">unbind</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+          </span>
                   </dt>
         <dd>
-          
+          Should be run in widget dispose() method to prevent errors and allow
+reconecting to the service when needed. It's not advised to skip this.
                   
-  <div>
-            <span class="signature"><code>const MethodChannel(&quot;AudioService&quot;)</code></span>
-          </div>
-        </dd>
+</dd>
       </dl>
     </section>
+
 
   </div> <!-- /.main-content -->
 
@@ -283,8 +262,6 @@ This also runs <code>onPlayerCompleted()</code> to free resources
       <li class="section-title inherited"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="flutter_audio_as_service/FlutterAudioAsService/operator_equals.html">operator ==</a></li>
     
-      <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-properties">Static properties</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/audioListener.html">audioListener</a></li>
     
       <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-methods">Static methods</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/getAudioLength.html">getAudioLength</a></li>
@@ -295,9 +272,8 @@ This also runs <code>onPlayerCompleted()</code> to free resources
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/seekTo.html">seekTo</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/setListeners.html">setListeners</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/stop.html">stop</a></li>
+      <li><a href="flutter_audio_as_service/FlutterAudioAsService/unbind.html">unbind</a></li>
     
-      <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#constants">Constants</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/nativeChannel-constant.html">nativeChannel</a></li>
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
@@ -305,7 +281,7 @@ This also runs <code>onPlayerCompleted()</code> to free resources
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.2
+    flutter_audio_as_service 0.2.0
   </span>
 
   

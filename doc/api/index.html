@@ -108,6 +108,8 @@ FlutterAudioAsService.resume();
 <pre class="language-dart"><code class="language-dart">FlutterAudioAsService.seekBy(Duration(seconds: 30));
 FlutterAudioAsService.seekTo(Duration(minutes: 15, seconds: 47));
 </code></pre>
+<p>When the widget associated with running and controlling the service get's destroyed the method:
+<code>FlutterAudioAsService.unbind();</code> should be run (ex. on the dispose() method). It will bind itself back automatically when the next method is run on the service</p>
 <p>To stop playback and destroy the service run:</p>
 <pre class="language-dart"><code class="language-dart">FlutterAudioAsService.stop();
 </code></pre>
@@ -135,7 +137,7 @@ FlutterAudioAsService.seekTo(Duration(minutes: 15, seconds: 47));
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.2
+    flutter_audio_as_service 0.2.0
   </span>
 
   
