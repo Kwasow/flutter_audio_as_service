@@ -69,6 +69,10 @@
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
       <div><h1><span class="kind-class">AudioPlayerListener</span> class </h1></div>
 
+    <section class="desc markdown">
+      <p>A class to simplify the usage of callbacks. Specify the needed callbacks and pass the listener to
+<code>setListeners()</code></p>
+    </section>
     
 
     <section class="summary offset-anchor" id="constructors">
@@ -116,7 +120,8 @@
           </span>
                   </dt>
         <dd>
-          
+          Runs when the given audio source finishes. Could be used to implement playlists (plugin may include
+playlist somewhere in the future)
                   
 </dd>
         <dt id="onPlayerPositionChanged" class="callable">
@@ -125,7 +130,7 @@
           </span>
                   </dt>
         <dd>
-          
+          Runs whenever there is progress on audio playback. Useful to update a progress bar
                   
 </dd>
         <dt id="onPlayerStateChanged" class="callable">
@@ -134,7 +139,9 @@
           </span>
                   </dt>
         <dd>
-          
+          Runs whenever PlayerState changes ex. audio paused, resumed, stopped, loading, idle.
+Useful for making dynamic play/pause buttons (example app will include later) or having different behaviour for certain
+UI elements in different player states
                   
 </dd>
         <dt id="noSuchMethod" class="callable inherited">
@@ -208,7 +215,7 @@
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.0
+    flutter_audio_as_service 0.1.2
   </span>
 
   

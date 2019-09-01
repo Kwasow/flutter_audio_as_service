@@ -69,6 +69,9 @@
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
       <div><h1><span class="kind-class">FlutterAudioAsService</span> class </h1></div>
 
+    <section class="desc markdown">
+      <p>A library to simply start an Android audio service with notification and controll it</p>
+    </section>
     
 
     <section class="summary offset-anchor" id="constructors">
@@ -170,7 +173,7 @@
           </span>
                   </dt>
         <dd>
-          
+          Returns a Duration() with the current audio's length. Returns 0 if no audio is loaded
                   
 </dd>
         <dt id="init" class="callable">
@@ -179,16 +182,8 @@
           </span>
                   </dt>
         <dd>
-          
-                  
-</dd>
-        <dt id="methodCallHandler" class="callable">
-          <span class="name"><a href="flutter_audio_as_service/FlutterAudioAsService/methodCallHandler.html">methodCallHandler</a></span><span class="signature">(<wbr><span class="parameter" id="methodCallHandler-param-call"><span class="type-annotation">MethodCall</span> <span class="parameter-name">call</span></span>)
-            <span class="returntype parameter">&#8594; Future</span>
-          </span>
-                  </dt>
-        <dd>
-          
+          Starts the service, playback and sends a notification with given details
+albumCover and appIcon can be set to null to use default values. Usage with values given: <a href="flutter_audio_as_service/FlutterAudioAsService/init.html">[...]</a>
                   
 </dd>
         <dt id="pause" class="callable">
@@ -197,7 +192,7 @@
           </span>
                   </dt>
         <dd>
-          
+          Will pause the player. If player already paused will do nothing
                   
 </dd>
         <dt id="resume" class="callable">
@@ -206,7 +201,7 @@
           </span>
                   </dt>
         <dd>
-          
+          Will resume playback (only if already loaded earlier and paused afterwards). If already playing will do nothing
                   
 </dd>
         <dt id="seekBy" class="callable">
@@ -215,7 +210,7 @@
           </span>
                   </dt>
         <dd>
-          
+          Seeks by the specified time. Seeks forward  when a positive duration given and backwards if negative
                   
 </dd>
         <dt id="seekTo" class="callable">
@@ -224,7 +219,7 @@
           </span>
                   </dt>
         <dd>
-          
+          Seeks to a specified positions
                   
 </dd>
         <dt id="setListeners" class="callable">
@@ -233,7 +228,8 @@
           </span>
                   </dt>
         <dd>
-          
+          Let's the service send callbacks to Flutter ex. for interface updates.
+It's important to remove listeners in onDestroy() (not implemented)
                   
 </dd>
         <dt id="stop" class="callable">
@@ -242,7 +238,8 @@
           </span>
                   </dt>
         <dd>
-          
+          Stops and destroys the service. <a href="flutter_audio_as_service/FlutterAudioAsService/init.html">init()</a> has to be run after this one, if you want to start playback again
+This also runs <code>onPlayerCompleted()</code> to free resources
                   
 </dd>
       </dl>
@@ -292,7 +289,6 @@
       <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-methods">Static methods</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/getAudioLength.html">getAudioLength</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/init.html">init</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/methodCallHandler.html">methodCallHandler</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/pause.html">pause</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/resume.html">resume</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/seekBy.html">seekBy</a></li>
@@ -309,7 +305,7 @@
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.0
+    flutter_audio_as_service 0.1.2
   </span>
 
   

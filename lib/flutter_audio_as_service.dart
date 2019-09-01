@@ -7,19 +7,23 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 
+/// A library to simply start an Android audio service with notification and controll it
 class FlutterAudioAsService {
   static const MethodChannel nativeChannel =
       const MethodChannel("AudioService");
   static AudioPlayerListener audioListener;
 
-  // invoke Flutter from native
+  // invoke Flutter from 
+  
+  /// Let's the service send callbacks to Flutter ex. for interface updates.
+  /// It's important to remove listeners in onDestroy() (not implemented)
   static void setListeners(AudioPlayerListener listener) {
     audioListener = listener;
 
-    nativeChannel.setMethodCallHandler(methodCallHandler);
+    nativeChannel.setMethodCallHandler(_methodCallHandler);
   }
 
-  static Future<dynamic> methodCallHandler(MethodCall call) {
+  static Future<dynamic> _methodCallHandler(MethodCall call) {
     switch (call.method) {
       case "onPlayerStateChanged":
         switch (call.arguments) {
@@ -59,6 +63,12 @@ class FlutterAudioAsService {
   }
 
   // invoke native methods
+
+  /// Starts the service, playback and sends a notification with given details
+  /// albumCover and appIcon can be set to null to use default values. Usage with values given:
+  ///  - place the desired .png file inside android/app/src/main/res/drawable/
+  ///  - if filename is app_icon.png then set appIcon value to be "app_icon"
+  /// This command has to be run before any other. The service will stop on itself when playback is done
   static Future<void> init(String title, String channel, String url,
       String albumCover, String appIcon) async {
     String checkIfNull(String toCheck) {
@@ -78,30 +88,37 @@ class FlutterAudioAsService {
     });
   }
 
+  /// Stops and destroys the service. [init()] has to be run after this one, if you want to start playback again
+  /// This also runs [onPlayerCompleted()] to free resources
   static Future<void> stop() async {
     await nativeChannel.invokeMethod("stop");
   }
 
+  /// Will pause the player. If player already paused will do nothing
   static Future<void> pause() async {
     await nativeChannel.invokeMethod("pause");
   }
 
+  /// Will resume playback (only if already loaded earlier and paused afterwards). If already playing will do nothing
   static Future<void> resume() async {
     await nativeChannel.invokeMethod("resume");
   }
 
+  /// Seeks by the specified time. Seeks forward  when a positive duration given and backwards if negative
   static Future<void> seekBy(Duration duration) async {
     await nativeChannel.invokeMethod("seekBy", {
       "seekByInMs": duration.inMilliseconds,
     });
   }
 
+  /// Returns a Duration() with the current audio's length. Returns 0 if no audio is loaded
   static Future<Duration> getAudioLength() async {
     dynamic audioLength = await nativeChannel.invokeMethod("getAudioLength");
     return Duration(milliseconds: audioLength);
     // returns milliseconds
   }
 
+  /// Seeks to a specified positions
   static Future<void> seekTo(Duration seekTo) async {
     await nativeChannel.invokeMethod("seekTo", {
       "seekToInMs": seekTo.inMilliseconds,
@@ -109,8 +126,11 @@ class FlutterAudioAsService {
   }
 }
 
+/// Player states returned by the [onPlayerStateChanged()] callback
 enum PlayerState { idle, loading, playing, paused }
 
+/// A class to simplify the usage of callbacks. Specify the needed callbacks and pass the listener to
+/// [setListeners()]
 class AudioPlayerListener {
   AudioPlayerListener({
     Function onPlayerStateChanged,
@@ -124,18 +144,24 @@ class AudioPlayerListener {
   final Function _onPlayerPositionChanged;
   final Function _onPlayerCompleted;
 
+  /// Runs whenever PlayerState changes ex. audio paused, resumed, stopped, loading, idle.
+  /// Useful for making dynamic play/pause buttons (example app will include later) or having different behaviour for certain
+  /// UI elements in different player states
   onPlayerStateChanged(PlayerState state) {
     if (_onPlayerStateChanged != null) {
       _onPlayerStateChanged(state);
     }
   }
 
+  /// Runs whenever there is progress on audio playback. Useful to update a progress bar
   onPlayerPositionChanged(Duration position) {
     if (_onPlayerPositionChanged != null) {
       _onPlayerPositionChanged(position);
     }
   }
 
+  /// Runs when the given audio source finishes. Could be used to implement playlists (plugin may include
+  /// playlist somewhere in the future)
   onPlayerCompleted() {
     if (_onPlayerCompleted != null) {
       _onPlayerCompleted();

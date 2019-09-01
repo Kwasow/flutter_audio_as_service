@@ -101,6 +101,8 @@ public class AudioService extends Service {
           // add buffering string
         } else if (playbackState == SimpleExoPlayer.STATE_ENDED) {
           methodChannel.invokeMethod("onPlayerCompleted", null);
+          methodChannel.invokeMethod("onPlayerStateChanged", "idle");
+          stopSelf();
         } else if (playWhenReady) {
           methodChannel.invokeMethod("onPlayerStateChanged", "playing");
           // add playing
@@ -204,7 +206,7 @@ public class AudioService extends Service {
         public void run() {
             if (!(player == null)) {
                 if (player.getPlayWhenReady()) {
-                    methodChannel.invokeMethod("onPlayerPositionChanged", player.getCurrentPosition());
+                  methodChannel.invokeMethod("onPlayerPositionChanged", player.getCurrentPosition());
                 }
                 handler.postDelayed(this, 500);
             }

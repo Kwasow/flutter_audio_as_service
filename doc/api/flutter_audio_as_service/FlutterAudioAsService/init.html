@@ -75,7 +75,6 @@
       <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-methods">Static methods</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/getAudioLength.html">getAudioLength</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/init.html">init</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/methodCallHandler.html">methodCallHandler</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/pause.html">pause</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/resume.html">resume</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/seekBy.html">seekBy</a></li>
@@ -96,6 +95,11 @@
             <span class="name ">init</span>
 (<wbr><span class="parameter" id="init-param-title"><span class="type-annotation">String</span> <span class="parameter-name">title</span>, </span> <span class="parameter" id="init-param-channel"><span class="type-annotation">String</span> <span class="parameter-name">channel</span>, </span> <span class="parameter" id="init-param-url"><span class="type-annotation">String</span> <span class="parameter-name">url</span>, </span> <span class="parameter" id="init-param-albumCover"><span class="type-annotation">String</span> <span class="parameter-name">albumCover</span>, </span> <span class="parameter" id="init-param-appIcon"><span class="type-annotation">String</span> <span class="parameter-name">appIcon</span></span>)
       
+    </section>
+    <section class="desc markdown">
+      <p>Starts the service, playback and sends a notification with given details
+albumCover and appIcon can be set to null to use default values. Usage with values given:</p><ul><li>place the desired .png file inside android/app/src/main/res/drawable/</li><li>if filename is app_icon.png then set appIcon value to be "app_icon"
+This command has to be run before any other. The service will stop on itself when playback is done</li></ul>
     </section>
     
     <section class="summary source-code" id="source">
@@ -129,7 +133,7 @@
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.0
+    flutter_audio_as_service 0.1.2
   </span>
 
   

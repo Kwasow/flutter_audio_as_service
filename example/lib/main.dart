@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
       },
       onPlayerCompleted: () {
         print("Player completed");
+        audioPosition = Duration(milliseconds: 0);
       }
     );
 

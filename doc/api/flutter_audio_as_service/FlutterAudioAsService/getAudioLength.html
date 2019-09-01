@@ -75,7 +75,6 @@
       <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-methods">Static methods</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/getAudioLength.html">getAudioLength</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/init.html">init</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/methodCallHandler.html">methodCallHandler</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/pause.html">pause</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/resume.html">resume</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/seekBy.html">seekBy</a></li>
@@ -97,14 +96,14 @@
 (<wbr>)
       
     </section>
+    <section class="desc markdown">
+      <p>Returns a Duration() with the current audio's length. Returns 0 if no audio is loaded</p>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">static Future&lt;Duration&gt; getAudioLength() async {
   dynamic audioLength = await nativeChannel.invokeMethod(&quot;getAudioLength&quot;);
-  if (audioLength == null) {
-    audioLength = 1000;
-  }
   return Duration(milliseconds: audioLength);
   &#47;&#47; returns milliseconds
 }</code></pre>
@@ -119,7 +118,7 @@
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.0
+    flutter_audio_as_service 0.1.2
   </span>
 
   
