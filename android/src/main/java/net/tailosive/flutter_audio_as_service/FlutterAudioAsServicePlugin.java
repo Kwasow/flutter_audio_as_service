@@ -145,10 +145,11 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         if (!(runningService == null)) {
           runningService.player.seekTo(seekTo + seekToInMs);
         }
+        break;
 
       default:
         Log.e("Audio", "Wrong method call");
-        result.notImplemented();
+        // result.notImplemented();
         break;
     }
   }
