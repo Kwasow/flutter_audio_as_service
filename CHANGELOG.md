@@ -1,3 +1,8 @@
+## 0.1.2
+
+ - Updated example
+ - Fixed seekTo() throwing error
+
 ## 0.1.1
 
  - Prevented running functions on null object references
