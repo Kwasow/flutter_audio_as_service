@@ -23,7 +23,7 @@ import android.os.IBinder;
 public class FlutterAudioAsServicePlugin implements MethodCallHandler {
   public static PluginRegistry.Registrar pluginRegistrar;
   public static Context context;
-  public static MethodChannel channel;
+  public static MethodChannel methodChannel;
   AudioService audioService;
   static Intent serviceIntent;
   boolean isBound = false;
@@ -31,8 +31,8 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
 
   /** Plugin registration. */
   public static void registerWith(PluginRegistry.Registrar registrar) {
-    channel = new MethodChannel(registrar.messenger(), "AudioService");
-    channel.setMethodCallHandler(new FlutterAudioAsServicePlugin());
+    methodChannel = new MethodChannel(registrar.messenger(), "AudioService");
+    methodChannel.setMethodCallHandler(new FlutterAudioAsServicePlugin());
 
     pluginRegistrar = registrar;
     context = pluginRegistrar.activeContext();
@@ -141,6 +141,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
           audioService.seekBy(seekByInMs);
         }
 
+        methodChannel.invokeMethod("onPlayerPositionChanged", audioService.player.getCurrentPosition());
         result.success(null);
         break;
 
@@ -159,12 +160,16 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
         if (!(audioService == null)) {
           audioService.player.seekTo(seekTo + seekToInMs);
         }
+
+        methodChannel.invokeMethod("onPlayerPositionChanged", audioService.player.getCurrentPosition());
+        result.success(null);
         break;
 
       case "unBind":
         if (isBound) {
           context.unbindService(serviceConnection);
         }
+        result.success(null);
         break;
 
       case "checkIfBound": {

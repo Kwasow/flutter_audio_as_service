@@ -42,14 +42,13 @@ import java.io.File;
 import io.flutter.plugin.common.MethodChannel;
 
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.pluginRegistrar;
-import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.channel;
+import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.methodChannel;
 
 public class AudioService extends Service {
   private final IBinder iBinder = new LocalBinder();
 
   Context context = this;
   private Handler handler;
-  MethodChannel methodChannel = channel;
 
   private static Cache cache;
   public SimpleExoPlayer player;
