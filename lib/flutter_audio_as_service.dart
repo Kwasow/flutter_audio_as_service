@@ -79,6 +79,7 @@ class FlutterAudioAsService {
       }
     }
 
+    await _checkIfBound();
     await _nativeChannel.invokeMethod("startService", {
       "title": title,
       "channel": channel,
@@ -91,21 +92,25 @@ class FlutterAudioAsService {
   /// Stops and destroys the service. [init()] has to be run after this one, if you want to start playback again
   /// This also runs [onPlayerCompleted()] to free resources
   static Future<void> stop() async {
+    await _checkIfBound();
     await _nativeChannel.invokeMethod("stop");
   }
 
   /// Will pause the player. If player already paused will do nothing
   static Future<void> pause() async {
+    await _checkIfBound();
     await _nativeChannel.invokeMethod("pause");
   }
 
   /// Will resume playback (only if already loaded earlier and paused afterwards). If already playing will do nothing
   static Future<void> resume() async {
+    await _checkIfBound();
     await _nativeChannel.invokeMethod("resume");
   }
 
   /// Seeks by the specified time. Seeks forward  when a positive duration given and backwards if negative
   static Future<void> seekBy(Duration duration) async {
+    await _checkIfBound();
     await _nativeChannel.invokeMethod("seekBy", {
       "seekByInMs": duration.inMilliseconds,
     });
@@ -113,6 +118,7 @@ class FlutterAudioAsService {
 
   /// Returns a Duration() with the current audio's length. Returns 0 if no audio is loaded
   static Future<Duration> getAudioLength() async {
+    await _checkIfBound();
     dynamic audioLength = await _nativeChannel.invokeMethod("getAudioLength");
     return Duration(milliseconds: audioLength);
     // returns milliseconds
@@ -120,13 +126,19 @@ class FlutterAudioAsService {
 
   /// Seeks to a specified positions
   static Future<void> seekTo(Duration seekTo) async {
+    await _checkIfBound();
     await _nativeChannel.invokeMethod("seekTo", {
       "seekToInMs": seekTo.inMilliseconds,
     });
   }
 
   static Future<void> unbind() async {
+    await _checkIfBound();
     await _nativeChannel.invokeMethod("unBind");
+  }
+
+  static Future<void> _checkIfBound() async {
+    await _nativeChannel.invokeMethod("checkIfBound");
   }
 }
 

@@ -221,6 +221,7 @@ public class AudioService extends Service {
     super.onDestroy();
 
     handler = null;
+    nowPlayingUrl = "";
 
     mediaSession.release();
     mediaSessionConnector.setPlayer(null);

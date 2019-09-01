@@ -20,12 +20,14 @@ import android.util.Log;
 import android.os.IBinder;
 
 /** FlutterAudioAsServicePlugin */
-public class FlutterAudioAsServicePlugin implements MethodCallHandler{
+public class FlutterAudioAsServicePlugin implements MethodCallHandler {
   public static PluginRegistry.Registrar pluginRegistrar;
   public static Context context;
   public static MethodChannel channel;
   AudioService audioService;
+  static Intent serviceIntent;
   boolean isBound = false;
+  static FlutterAudioAsServicePlugin plugin;
 
   /** Plugin registration. */
   public static void registerWith(PluginRegistry.Registrar registrar) {
@@ -34,6 +36,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
 
     pluginRegistrar = registrar;
     context = pluginRegistrar.activeContext();
+    serviceIntent = new Intent(context, AudioService.class);
   }
 
   private ServiceConnection serviceConnection = new ServiceConnection() {
@@ -50,15 +53,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
     }
   };
 
-  Intent serviceIntent;
-
   public void onMethodCall(MethodCall call, Result result) {
-    serviceIntent = new Intent(context, AudioService.class);
-
-    if (!isBound) {
-      context.bindService(serviceIntent, serviceConnection, Context.BIND_IMPORTANT);
-    }
-
     switch (call.method) {
 
       case "startService":
@@ -172,18 +167,27 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         }
         break;
 
-      default:
-        Log.e("Audio", "Wrong method call");
-        // result.notImplemented();
+      case "checkIfBound": {
+        if (!isBound) {
+          context.bindService(serviceIntent, serviceConnection, Context.BIND_IMPORTANT);
+        }
+        result.success(null);
         break;
+      }
+
+      default: {
+        Log.e("Audio", "Wrong method call");
+        result.notImplemented();
+        break;
+      }
     }
   }
 
   private static boolean isValidDrawableResource(Context context, String name) {
-      int resourceId = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
-      if (resourceId == 0) {
-          return false;
-      }
-      return true;
+    int resourceId = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+    if (resourceId == 0) {
+      return false;
+    }
+    return true;
   }
 }
