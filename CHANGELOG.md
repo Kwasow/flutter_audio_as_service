@@ -1,3 +1,7 @@
+## 0.1.3
+
+ - Updated documentation
+
 ## 0.1.2
 
  - Updated example
