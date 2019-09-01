@@ -14,15 +14,18 @@ import io.flutter.plugin.common.PluginRegistry;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.ComponentName;
 import android.util.Log;
-
-import static net.tailosive.flutter_audio_as_service.AudioService.runningService;
+import android.os.IBinder;
 
 /** FlutterAudioAsServicePlugin */
 public class FlutterAudioAsServicePlugin implements MethodCallHandler{
   public static PluginRegistry.Registrar pluginRegistrar;
   public static Context context;
   public static MethodChannel channel;
+  AudioService audioService;
+  boolean isBound = false;
 
   /** Plugin registration. */
   public static void registerWith(PluginRegistry.Registrar registrar) {
@@ -33,9 +36,29 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
     context = pluginRegistrar.activeContext();
   }
 
+  private ServiceConnection serviceConnection = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+      AudioService.LocalBinder binder = (AudioService.LocalBinder) service;
+      audioService = binder.getService();
+      isBound = true;
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+      isBound = false;
+    }
+  };
+
   Intent serviceIntent;
 
   public void onMethodCall(MethodCall call, Result result) {
+    serviceIntent = new Intent(context, AudioService.class);
+
+    if (!isBound) {
+      context.bindService(serviceIntent, serviceConnection, Context.BIND_IMPORTANT);
+    }
+
     switch (call.method) {
 
       case "startService":
@@ -47,11 +70,9 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         String smallIcon = call.argument("appIcon");
         String bigIcon = call.argument("albumCover");
 
-        if (!(runningService == null)) {
-          if (!(url.equals(runningService.getUrlPlaying()))) {
-            runningService.serviceStop();
-
-            serviceIntent = new Intent(context, AudioService.class);
+        if (!(audioService == null)) {
+          if (!(url.equals(audioService.getUrlPlaying()))) {
+            audioService.serviceStop();
 
             if (isValidDrawableResource(pluginRegistrar.context(), smallIcon)) {
               serviceIntent.putExtra("appIcon", smallIcon);
@@ -73,8 +94,6 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
             Log.i("Audio", "This audio is already playing, not starting again");
           }
         } else {
-          serviceIntent = new Intent(context, AudioService.class);
-
           if (isValidDrawableResource(pluginRegistrar.context(), smallIcon)) {
             serviceIntent.putExtra("appIcon", smallIcon);
           } else {
@@ -97,24 +116,24 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         break;
 
       case "stop":
-        if (!(runningService == null)) {
-          runningService.serviceStop();
+        if (!(audioService == null)) {
+          audioService.serviceStop();
         }
 
         result.success(null);
         break;
 
       case "pause":
-        if (!(runningService == null)) {
-          runningService.pauseAudio();
+        if (!(audioService == null)) {
+          audioService.pauseAudio();
         }
 
         result.success(null);
         break;
 
       case "resume":
-        if (!(runningService == null)) {
-          runningService.resumeAudio();
+        if (!(audioService == null)) {
+          audioService.resumeAudio();
         }
 
         result.success(null);
@@ -123,18 +142,18 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
       case "seekBy":
         int seekByInMs = call.argument("seekByInMs");
 
-        if (!(runningService == null)) {
-          runningService.seekBy(seekByInMs);
+        if (!(audioService == null)) {
+          audioService.seekBy(seekByInMs);
         }
 
         result.success(null);
         break;
 
       case "getAudioLength":
-        if (runningService.player == null) {
+        if (audioService.player == null) {
           result.success(0);
         } else {
-          result.success(runningService.getPlayerAudioLength());
+          result.success(audioService.getPlayerAudioLength());
         }
         break;
 
@@ -142,8 +161,14 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler{
         long seekTo = 0;
         int seekToInMs = call.argument("seekToInMs");
 
-        if (!(runningService == null)) {
-          runningService.player.seekTo(seekTo + seekToInMs);
+        if (!(audioService == null)) {
+          audioService.player.seekTo(seekTo + seekToInMs);
+        }
+        break;
+
+      case "unBind":
+        if (isBound) {
+          context.unbindService(serviceConnection);
         }
         break;
 

@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.media.session.MediaSessionCompat;
 
@@ -44,8 +45,9 @@ import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.channel;
 
 public class AudioService extends Service {
+  private final IBinder iBinder = new LocalBinder();
+
   Context context = this;
-  public static AudioService runningService;
   private Handler handler;
   MethodChannel methodChannel = channel;
 
@@ -68,8 +70,6 @@ public class AudioService extends Service {
   @Override
   public int onStartCommand(final Intent intent, int flags, int startId) {
     super.onStartCommand(intent, flags, startId);
-
-    runningService = this;
 
     final String title = intent.getStringExtra("title");
     final String channel = intent.getStringExtra("channel");
@@ -220,7 +220,6 @@ public class AudioService extends Service {
   public void onDestroy() {
     super.onDestroy();
 
-    runningService = null;
     handler = null;
 
     mediaSession.release();
@@ -230,10 +229,16 @@ public class AudioService extends Service {
     player = null;
   }
 
+  public class LocalBinder extends Binder {
+    AudioService getService() {
+      return AudioService.this;
+    }
+  }
+
   @Nullable
   @Override
   public IBinder onBind(Intent intent) {
-    return null;
+    return iBinder;
   }
 
   public void pauseAudio() {

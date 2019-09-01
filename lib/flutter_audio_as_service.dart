@@ -9,18 +9,18 @@ import 'package:flutter/services.dart';
 
 /// A library to simply start an Android audio service with notification and controll it
 class FlutterAudioAsService {
-  static const MethodChannel nativeChannel =
+  static const MethodChannel _nativeChannel =
       const MethodChannel("AudioService");
-  static AudioPlayerListener audioListener;
+  static AudioPlayerListener _audioListener;
 
   // invoke Flutter from 
   
   /// Let's the service send callbacks to Flutter ex. for interface updates.
   /// It's important to remove listeners in onDestroy() (not implemented)
   static void setListeners(AudioPlayerListener listener) {
-    audioListener = listener;
+    _audioListener = listener;
 
-    nativeChannel.setMethodCallHandler(_methodCallHandler);
+    _nativeChannel.setMethodCallHandler(_methodCallHandler);
   }
 
   static Future<dynamic> _methodCallHandler(MethodCall call) {
@@ -28,30 +28,30 @@ class FlutterAudioAsService {
       case "onPlayerStateChanged":
         switch (call.arguments) {
           case "idle":
-            audioListener.onPlayerStateChanged(PlayerState.idle);
+            _audioListener.onPlayerStateChanged(PlayerState.idle);
             break;
 
           case "buffering":
-            audioListener.onPlayerStateChanged(PlayerState.loading);
+            _audioListener.onPlayerStateChanged(PlayerState.loading);
             break;
 
           case "playing":
-            audioListener.onPlayerStateChanged(PlayerState.playing);
+            _audioListener.onPlayerStateChanged(PlayerState.playing);
             break;
 
           case "pause":
-            audioListener.onPlayerStateChanged(PlayerState.paused);
+            _audioListener.onPlayerStateChanged(PlayerState.paused);
             break;
         }
         break;
 
       case "onPlayerPositionChanged":
-        audioListener
+        _audioListener
             .onPlayerPositionChanged(Duration(milliseconds: call.arguments));
         break;
 
       case "onPlayerCompleted":
-        audioListener.onPlayerCompleted();
+        _audioListener.onPlayerCompleted();
         break;
 
       default:
@@ -79,7 +79,7 @@ class FlutterAudioAsService {
       }
     }
 
-    await nativeChannel.invokeMethod("startService", {
+    await _nativeChannel.invokeMethod("startService", {
       "title": title,
       "channel": channel,
       "url": url,
@@ -91,38 +91,42 @@ class FlutterAudioAsService {
   /// Stops and destroys the service. [init()] has to be run after this one, if you want to start playback again
   /// This also runs [onPlayerCompleted()] to free resources
   static Future<void> stop() async {
-    await nativeChannel.invokeMethod("stop");
+    await _nativeChannel.invokeMethod("stop");
   }
 
   /// Will pause the player. If player already paused will do nothing
   static Future<void> pause() async {
-    await nativeChannel.invokeMethod("pause");
+    await _nativeChannel.invokeMethod("pause");
   }
 
   /// Will resume playback (only if already loaded earlier and paused afterwards). If already playing will do nothing
   static Future<void> resume() async {
-    await nativeChannel.invokeMethod("resume");
+    await _nativeChannel.invokeMethod("resume");
   }
 
   /// Seeks by the specified time. Seeks forward  when a positive duration given and backwards if negative
   static Future<void> seekBy(Duration duration) async {
-    await nativeChannel.invokeMethod("seekBy", {
+    await _nativeChannel.invokeMethod("seekBy", {
       "seekByInMs": duration.inMilliseconds,
     });
   }
 
   /// Returns a Duration() with the current audio's length. Returns 0 if no audio is loaded
   static Future<Duration> getAudioLength() async {
-    dynamic audioLength = await nativeChannel.invokeMethod("getAudioLength");
+    dynamic audioLength = await _nativeChannel.invokeMethod("getAudioLength");
     return Duration(milliseconds: audioLength);
     // returns milliseconds
   }
 
   /// Seeks to a specified positions
   static Future<void> seekTo(Duration seekTo) async {
-    await nativeChannel.invokeMethod("seekTo", {
+    await _nativeChannel.invokeMethod("seekTo", {
       "seekToInMs": seekTo.inMilliseconds,
     });
+  }
+
+  static Future<void> unbind() async {
+    await _nativeChannel.invokeMethod("unBind");
   }
 }
 
