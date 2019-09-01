@@ -107,6 +107,12 @@ class _MyAppState extends State<MyApp> {
                   await FlutterAudioAsService.seekBy(Duration(seconds: 30));
                 },
               ),
+              RaisedButton(
+                child: Text("Seek to end"),
+                onPressed: () async {
+                  await FlutterAudioAsService.seekTo(audioLength - Duration(seconds: 15));
+                },
+              ),
               Text("Audio length: " + audioLength.toString()),
               Text("Player progress: " + audioPosition.toString() + " / " + audioLength.toString()),
             ],
