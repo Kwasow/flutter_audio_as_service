@@ -135,7 +135,6 @@ class FlutterAudioAsService {
   /// Should be run in widget dispose() method to prevent errors and allow
   /// reconecting to the service when needed. It's not advised to skip this.
   static Future<void> unbind() async {
-    await _checkIfBound();
     await _nativeChannel.invokeMethod("unBind");
   }
 

@@ -81,6 +81,8 @@ FlutterAudioAsService.seekTo(Duration(minutes: 15, seconds: 47));
 When the widget associated with running and controlling the service get's destroyed the method:
 `FlutterAudioAsService.unbind();` should be run (ex. on the dispose() method). It will bind itself back automatically when the next method is run on the service
 
+Because the plugin is still under development you have to change if the players state is not idle before unbinding the service. If it's idle it means the service is not running. Unbinding a non-existent service will throw an error.
+
 To stop playback and destroy the service run:
 ```dart
 FlutterAudioAsService.stop();
