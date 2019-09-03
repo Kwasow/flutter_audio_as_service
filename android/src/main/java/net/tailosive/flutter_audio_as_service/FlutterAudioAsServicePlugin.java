@@ -57,6 +57,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
     switch (call.method) {
 
       case "startService":
+        result.success(null);
         // this really needs some work - it's to long as of now
 
         String title = call.argument("title");
@@ -106,8 +107,6 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
           serviceIntent.putExtra("url", url);
           context.startService(serviceIntent);
         }
-
-        result.success(null);
         break;
 
       case "stop":

@@ -31,6 +31,7 @@ class _MyAppState extends State<MyApp> {
 
     AudioPlayerListener listener = AudioPlayerListener(
       onPlayerStateChanged: (PlayerState playerState) {
+        print(playerState);
         if (playerState == PlayerState.idle) {
           setState(() {
             audioLength = Duration(milliseconds: 0);

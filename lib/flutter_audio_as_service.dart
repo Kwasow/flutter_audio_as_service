@@ -39,7 +39,7 @@ class FlutterAudioAsService {
             _audioListener.onPlayerStateChanged(PlayerState.playing);
             break;
 
-          case "pause":
+          case "paused":
             _audioListener.onPlayerStateChanged(PlayerState.paused);
             break;
         }
