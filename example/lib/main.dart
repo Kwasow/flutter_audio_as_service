@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
         if (playerState == PlayerState.idle) {
           setState(() {
             audioLength = Duration(milliseconds: 0);
+            audioPosition = Duration(milliseconds: 0);
           });
         } else {
           setAudioLength();
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
       onPlayerCompleted: () {
         print("Player completed");
         audioPosition = Duration(milliseconds: 0);
+        audioLength = Duration(milliseconds: 0);
       }
     );
 
@@ -105,6 +107,10 @@ class _MyAppState extends State<MyApp> {
                     icon: Icon(Icons.stop),
                     onPressed: () async {
                       await FlutterAudioAsService.stop();
+                      setState(() {
+                        audioLength = Duration(milliseconds: 0);
+                        audioPosition = Duration(milliseconds: 0);
+                      });
                     },
                   ),
                 ],
