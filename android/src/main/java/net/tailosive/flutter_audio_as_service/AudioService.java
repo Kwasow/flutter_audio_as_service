@@ -43,6 +43,8 @@ import io.flutter.plugin.common.MethodChannel;
 
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.pluginRegistrar;
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.methodChannel;
+import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.isBound;
+import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.audioService;
 
 public class AudioService extends Service {
   private final IBinder iBinder = new LocalBinder();
@@ -166,6 +168,8 @@ public class AudioService extends Service {
             new PlayerNotificationManager.NotificationListener() {
               @Override
               public void onNotificationCancelled(int notificationId, boolean dismissedByUser) {
+                isBound = false;
+                audioService = null;
                 stopSelf();
               }
 
@@ -239,6 +243,11 @@ public class AudioService extends Service {
   @Override
   public IBinder onBind(Intent intent) {
     return iBinder;
+  }
+
+  @Override
+  public boolean onUnbind(Intent intent) {
+    return super.onUnbind(intent);
   }
 
   public void pauseAudio() {

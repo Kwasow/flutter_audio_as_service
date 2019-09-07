@@ -24,9 +24,9 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
   public static PluginRegistry.Registrar pluginRegistrar;
   public static Context context;
   public static MethodChannel methodChannel;
-  AudioService audioService;
+  public static AudioService audioService;
   static Intent serviceIntent;
-  boolean isBound = false;
+  public static boolean isBound = false;
   static FlutterAudioAsServicePlugin plugin;
 
   /** Plugin registration. */
@@ -50,6 +50,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
     @Override
     public void onServiceDisconnected(ComponentName name) {
       isBound = false;
+      audioService = null;
     }
   };
 
@@ -112,6 +113,8 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
 
       case "stop":
         if (!(audioService == null)) {
+          context.unbindService(serviceConnection);
+
           audioService.serviceStop();
         }
 
