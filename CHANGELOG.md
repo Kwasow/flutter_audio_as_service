@@ -1,3 +1,7 @@
+## 0.2.0
+
+ - The service now gets bound to the flutter app and unbinds automatically. This improves background performance and stability
+
 ## 0.1.3
 
  - Updated documentation

@@ -1,7 +1,7 @@
 A Flutter plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
 Licensed under the BSD License
 
-Pull requests are welcome.
+We are now accepting feature and pull requests.
 
 The plugin is Android only as of now.
 
