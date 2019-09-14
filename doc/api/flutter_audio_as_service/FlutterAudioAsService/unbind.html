@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the nativeChannel constant from the FlutterAudioAsService class, for the Dart programming language.">
-  <title>nativeChannel constant - FlutterAudioAsService class - flutter_audio_as_service library - Dart API</title>
+  <meta name="description" content="API docs for the unbind method from the FlutterAudioAsService class, for the Dart programming language.">
+  <title>unbind method - FlutterAudioAsService class - flutter_audio_as_service library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -27,9 +27,9 @@
     <li><a href="index.html">flutter_audio_as_service</a></li>
     <li><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></li>
     <li><a href="flutter_audio_as_service/FlutterAudioAsService-class.html">FlutterAudioAsService</a></li>
-    <li class="self-crumb">nativeChannel constant</li>
+    <li class="self-crumb">unbind method</li>
   </ol>
-  <div class="self-name">nativeChannel</div>
+  <div class="self-name">unbind</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="index.html">flutter_audio_as_service</a></li>
       <li><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService-class.html">FlutterAudioAsService</a></li>
-      <li class="self-crumb">nativeChannel constant</li>
+      <li class="self-crumb">unbind method</li>
     </ol>
     
     <h5>FlutterAudioAsService class</h5>
@@ -69,8 +69,6 @@
       <li class="section-title inherited"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="flutter_audio_as_service/FlutterAudioAsService/operator_equals.html">operator ==</a></li>
     
-      <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-properties">Static properties</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/audioListener.html">audioListener</a></li>
     
       <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-methods">Static methods</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/getAudioLength.html">getAudioLength</a></li>
@@ -81,28 +79,27 @@
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/seekTo.html">seekTo</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/setListeners.html">setListeners</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/stop.html">stop</a></li>
+      <li><a href="flutter_audio_as_service/FlutterAudioAsService/unbind.html">unbind</a></li>
     
-      <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#constants">Constants</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/nativeChannel-constant.html">nativeChannel</a></li>
     </ol>
-  </div><!--/.sidebar-offcanvas-left-->
+  </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-constant">nativeChannel</span> constant</h1></div>
+      <div><h1><span class="kind-method">unbind</span> method</h1></div>
 
     <section class="multi-line-signature">
-        <span class="returntype">MethodChannel</span>
-        const <span class="name ">nativeChannel</span>
-        =
-        <span class="constant-value">const MethodChannel(&quot;AudioService&quot;)</span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+            <span class="name ">unbind</span>
+(<wbr>)
+      
     </section>
-
-        <section class="summary source-code" id="source">
+    
+    <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static const MethodChannel nativeChannel =
-    const MethodChannel(&quot;AudioService&quot;)
-
-</code></pre>
+      <pre class="language-dart"><code class="language-dart">static Future&lt;void&gt; unbind() async {
+  await _checkIfBound();
+  await _nativeChannel.invokeMethod(&quot;unBind&quot;);
+}</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
@@ -114,7 +111,7 @@
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.2
+    flutter_audio_as_service 0.2.1
   </span>
 
   

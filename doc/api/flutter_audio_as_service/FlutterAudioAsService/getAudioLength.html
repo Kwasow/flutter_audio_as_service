@@ -69,8 +69,6 @@
       <li class="section-title inherited"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="flutter_audio_as_service/FlutterAudioAsService/operator_equals.html">operator ==</a></li>
     
-      <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-properties">Static properties</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/audioListener.html">audioListener</a></li>
     
       <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#static-methods">Static methods</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/getAudioLength.html">getAudioLength</a></li>
@@ -81,9 +79,8 @@
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/seekTo.html">seekTo</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/setListeners.html">setListeners</a></li>
       <li><a href="flutter_audio_as_service/FlutterAudioAsService/stop.html">stop</a></li>
+      <li><a href="flutter_audio_as_service/FlutterAudioAsService/unbind.html">unbind</a></li>
     
-      <li class="section-title"><a href="flutter_audio_as_service/FlutterAudioAsService-class.html#constants">Constants</a></li>
-      <li><a href="flutter_audio_as_service/FlutterAudioAsService/nativeChannel-constant.html">nativeChannel</a></li>
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
@@ -103,7 +100,8 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">static Future&lt;Duration&gt; getAudioLength() async {
-  dynamic audioLength = await nativeChannel.invokeMethod(&quot;getAudioLength&quot;);
+  await _checkIfBound();
+  dynamic audioLength = await _nativeChannel.invokeMethod(&quot;getAudioLength&quot;);
   return Duration(milliseconds: audioLength);
   &#47;&#47; returns milliseconds
 }</code></pre>
@@ -118,7 +116,7 @@
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.1.2
+    flutter_audio_as_service 0.2.1
   </span>
 
   
