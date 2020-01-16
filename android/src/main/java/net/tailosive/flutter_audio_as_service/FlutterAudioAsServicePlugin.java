@@ -64,7 +64,8 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
         String channel = call.argument("channel");
         String url = call.argument("url");
         String smallIcon = call.argument("appIcon");
-        String bigIcon = call.argument("albumCover");
+        String bigIcon = call.argument("albumCoverUrl");
+        Log.d("TailosiveAudio", bigIcon);
 
         if (!(audioService == null)) {
           if (!(url.equals(audioService.getUrlPlaying()))) {
@@ -75,13 +76,14 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
             } else {
               serviceIntent.putExtra("appIcon", (String) null);
             }
-
+/*
             if (isValidDrawableResource(pluginRegistrar.context(), bigIcon)) {
               serviceIntent.putExtra("bigIcon", bigIcon);
             } else {
               serviceIntent.putExtra("bigIcon", (String) null);
             }
-
+*/
+            serviceIntent.putExtra("bigIcon", bigIcon);
             serviceIntent.putExtra("title", title);
             serviceIntent.putExtra("channel", channel);
             serviceIntent.putExtra("url", url);
@@ -95,13 +97,14 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
           } else {
             serviceIntent.putExtra("appIcon", (String) null);
           }
-
+/*
           if (isValidDrawableResource(pluginRegistrar.context(), bigIcon)) {
             serviceIntent.putExtra("bigIcon", bigIcon);
           } else {
             serviceIntent.putExtra("bigIcon", (String) null);
           }
-
+*/
+          serviceIntent.putExtra("bigIcon", bigIcon);
           serviceIntent.putExtra("title", title);
           serviceIntent.putExtra("channel", channel);
           serviceIntent.putExtra("url", url);

@@ -54,6 +54,8 @@ class FlutterAudioAsService {
         _audioListener.onPlayerCompleted();
         break;
 
+      // TODO: case launch app runApp() try this 
+
       default:
         print("ERROR: method not implemented");
         break;
@@ -65,12 +67,13 @@ class FlutterAudioAsService {
   // invoke native methods
 
   /// Starts the service, playback and sends a notification with given details
-  /// albumCover and appIcon can be set to null to use default values. Usage with values given:
+  /// and appIcon can be set to null to use default values. Usage with values given:
   ///  - place the desired .png file inside android/app/src/main/res/drawable/
   ///  - if filename is app_icon.png then set appIcon value to be "app_icon"
   /// This command has to be run before any other. The service will stop on itself when playback is done
+  /// Feel free to set albumCoverUrl to any online url you want
   static Future<void> init(String title, String channel, String url,
-      String albumCover, String appIcon) async {
+      String albumCoverUrl, String appIcon) async {
     String checkIfNull(String toCheck) {
       if (toCheck == null) {
         return "theGivenResourceIsNull";
@@ -84,7 +87,7 @@ class FlutterAudioAsService {
       "title": title,
       "channel": channel,
       "url": url,
-      "albumCover": checkIfNull(albumCover),
+      "albumCoverUrl": checkIfNull(albumCoverUrl),
       "appIcon": checkIfNull(appIcon),
     });
   }

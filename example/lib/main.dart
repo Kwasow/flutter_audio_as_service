@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                     "Title",
                     "Author",
                     "https://feeds.soundcloud.com/stream/655083446-tailosivecast-ep-054-series-finale.m4a",
-                    "ic_launcher",  // IMPORTANT!
+                    "https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg",  // IMPORTANT!
                     "app_icon",     // see README for details about usage
                   );
                   setState(() {

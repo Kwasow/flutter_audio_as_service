@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.util.Log;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Player;
@@ -37,9 +38,20 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 
 import androidx.annotation.Nullable;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 import io.flutter.plugin.common.MethodChannel;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.pluginRegistrar;
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.methodChannel;
@@ -75,13 +87,14 @@ public class AudioService extends Service {
     final String title = intent.getStringExtra("title");
     final String channel = intent.getStringExtra("channel");
     final String url = intent.getStringExtra("url");
+    final String imageUrl = intent.getStringExtra("bigIcon");
     nowPlayingUrl = url;
 
     player = ExoPlayerFactory.newSimpleInstance(context, new DefaultTrackSelector());
 
     DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
             context,
-            Util.getUserAgent(context, "TailosivePlugin"));
+            Util.getUserAgent(context, "TailosiveAudio"));
 
     CacheDataSourceFactory cacheDataSourceFactory = new CacheDataSourceFactory(getCache(this), dataSourceFactory);
     MediaSource audioSource = new ProgressiveMediaSource.Factory(cacheDataSourceFactory)
@@ -133,10 +146,11 @@ public class AudioService extends Service {
               @Nullable
               @Override
               public PendingIntent createCurrentContentIntent(Player player) {
-                        /*
-                        Intent intent = new Intent(context, MainActivity.class);
-                        return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        */
+                /*
+                System.out.println(getApplicationContext());
+                Intent intent = new Intent(context, getApplication().getClass());
+                return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                */
                 return null;
               }
 
@@ -149,20 +163,9 @@ public class AudioService extends Service {
               @Nullable
               @Override
               public Bitmap getCurrentLargeIcon(Player player, PlayerNotificationManager.BitmapCallback callback) {
-                if (intent.getStringExtra("bigIcon") == null) {
-                  return null;
-                } else {
-                  int resourceId = pluginRegistrar.context().getResources().getIdentifier(
-                          intent.getStringExtra("bigIcon"),
-                          "drawable",
-                          pluginRegistrar.context().getPackageName());
-                  Bitmap bigIconBitmap = BitmapFactory.decodeResource(
-                          pluginRegistrar.context().getResources(),
-                          resourceId
-                  );
-                  return bigIconBitmap;
+                File file = new File(getCacheDir().toString() + "/" + title);
 
-                }
+                return BitmapFactory.decodeFile(file.toString());
               }
             },
             new PlayerNotificationManager.NotificationListener() {
@@ -215,6 +218,69 @@ public class AudioService extends Service {
             }
         }
     }, 500);
+
+    Observable<File> observable = Observable.create(new ObservableOnSubscribe<File>() {
+      @Override
+      public void subscribe(ObservableEmitter<File> emitter) {
+        String cache = getCacheDir().toString();
+        File imageFile = new File(cache + "/" + title);
+
+        Thread networkThread = new Thread(() -> {
+          try {
+            URL remoteFile = new URL(imageUrl);
+
+            URLConnection connection = remoteFile.openConnection();
+            connection.connect();
+
+            InputStream inputStream = new BufferedInputStream(remoteFile.openStream(), 1024);
+            OutputStream outputStream = new FileOutputStream(imageFile);
+            byte[] buffer = new byte[1024];
+
+            int count = 0;
+            while ((count = inputStream.read(buffer)) > 0) {
+              outputStream.write(buffer, 0, count);
+            }
+
+            outputStream.flush();
+            inputStream.close();
+            outputStream.close();
+
+            emitter.onNext(imageFile);
+
+          } catch (Exception e) {
+            emitter.onError(e);
+          }
+
+          emitter.onComplete();
+        });
+
+        networkThread.start();
+      }
+    });
+
+    Observer<File> downloadObserver = new Observer<File>() {
+      @Override
+      public void onSubscribe(Disposable d) {
+        Log.d("TailosiveAudio", "Downloading album cover");
+      }
+
+      @Override
+      public void onNext(File file) {
+        playerNotificationManager.invalidate();
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        Log.e("TailosiveAudio", e.toString());
+      }
+
+      @Override
+      public void onComplete() {
+        Log.d("TailosiveAudio", "Notification posted");
+      }
+    };
+
+    observable.subscribe(downloadObserver);
 
     return START_STICKY;
   }
