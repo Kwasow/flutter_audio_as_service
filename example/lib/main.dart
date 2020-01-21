@@ -6,6 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_as_service/flutter_audio_as_service.dart';
+import 'package:flutter_audio_as_service/AudioInfoClass.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,6 +18,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Duration audioLength = Duration(milliseconds: 0);
   Duration audioPosition = Duration(milliseconds: 0);
+
+  AudioInfo trackDetails = AudioInfo(
+    "Title",
+    "Author",
+    "https://feeds.soundcloud.com/stream/655083446-tailosivecast-ep-054-series-finale.m4a",
+    null,
+    "https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg",
+    null,
+    "app_icon"
+  );
 
   Future<void> setAudioLength() async {
     audioLength = await FlutterAudioAsService.getAudioLength();
@@ -76,13 +87,7 @@ class _MyAppState extends State<MyApp> {
               RaisedButton(
                 child: Text("Connect to service, load audio, start playback"),
                 onPressed: () async {
-                  await FlutterAudioAsService.init(
-                    "Title",
-                    "Author",
-                    "https://feeds.soundcloud.com/stream/655083446-tailosivecast-ep-054-series-finale.m4a",
-                    "https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg",  // IMPORTANT!
-                    "app_icon",     // see README for details about usage
-                  );
+                  await FlutterAudioAsService.init(trackDetails);
                   setState(() {
 
                   });

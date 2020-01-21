@@ -7,6 +7,8 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 
+import 'AudioInfoClass.dart';
+
 /// A library to simply start an Android audio service with notification and controll it
 class FlutterAudioAsService {
   static const MethodChannel _nativeChannel =
@@ -72,8 +74,7 @@ class FlutterAudioAsService {
   ///  - if filename is app_icon.png then set appIcon value to be "app_icon"
   /// This command has to be run before any other. The service will stop on itself when playback is done
   /// Feel free to set albumCoverUrl to any online url you want
-  static Future<void> init(String title, String channel, String url,
-      String albumCoverUrl, String appIcon) async {
+  static Future<void> init(AudioInfo details) async {
     String checkIfNull(String toCheck) {
       if (toCheck == null) {
         return "theGivenResourceIsNull";
@@ -84,11 +85,12 @@ class FlutterAudioAsService {
 
     await _checkIfBound();
     await _nativeChannel.invokeMethod("startService", {
-      "title": title,
-      "channel": channel,
-      "url": url,
-      "albumCoverUrl": checkIfNull(albumCoverUrl),
-      "appIcon": checkIfNull(appIcon),
+      "title": details.title,
+      "channel": details.artist,
+      "url": details.url,
+      "albumCoverFallback": checkIfNull(details.albumCoverFallback),
+      "albumCoverUrl": checkIfNull(details.albumCoverUrl),
+      "appIcon": checkIfNull(details.appIcon),
     });
   }
 
