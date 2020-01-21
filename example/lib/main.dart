@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   Duration audioLength = Duration(milliseconds: 0);
   Duration audioPosition = Duration(milliseconds: 0);
 
+  // See docs to find details about how to add fallback images and app icon
   AudioInfo trackDetails = AudioInfo(
     "Title",
     "Author",

@@ -69,9 +69,6 @@ class FlutterAudioAsService {
   // invoke native methods
 
   /// Starts the service, playback and sends a notification with given details
-  /// and appIcon can be set to null to use default values. Usage with values given:
-  ///  - place the desired .png file inside android/app/src/main/res/drawable/
-  ///  - if filename is app_icon.png then set appIcon value to be "app_icon"
   /// This command has to be run before any other. The service will stop on itself when playback is done
   /// Feel free to set albumCoverUrl to any online url you want
   static Future<void> init(AudioInfo details) async {
