@@ -1,6 +1,10 @@
 A Flutter plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
 Licensed under the BSD License
 
+# This plugin is not mantained
+I built this plugin as I needed for my app, but since I moved away from Flutter a long time ago it's been very difficult to manage this and keep it updated. I'm sorry to be leaving this in the current state, but if anyone is interested in picking it up from here - please contact me.
+
+
 We are now accepting feature and pull requests.
 
 The plugin is Android only as of now.
