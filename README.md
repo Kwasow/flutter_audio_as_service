@@ -39,11 +39,19 @@ Add the service to AndroidMainfest.xml
 
 To start playback initialize the player with the following:
 ```dart
-FlutterAudioAsService.init("Title", "Author", audioSource, appIcon, albumCover);
-```
-audioSource is a string - could be both a url or a file directory.
+AudioInfo info = AudioInfo(
+  "Title",
+  "Author",
+  audioUrl,
+  coverUrl,
+  drawableAppIcon
+)
 
-How to properly set appIcon and albumCover:
+FlutterAudioAsService.init(info);
+```
+audioUrl and coverUrl are strings - could be both urls or a file directories (file:///)
+
+How to properly set appIcon
   - put the desired .png image into android/src/main/res/drawable/
   - if your resource is app_icon.png then set the appIcon value to be "app_icon"
   - the value can be null
