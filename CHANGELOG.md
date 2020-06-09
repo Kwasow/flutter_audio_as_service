@@ -1,3 +1,10 @@
+## 0.3.0
+
+ - Bug fixes
+ - Implementation changes
+ - Tested offline audio and albumCover source
+ - Added abbility to set a different albumCover for each song
+
 ## 0.2.1
  
  - Stability improvements

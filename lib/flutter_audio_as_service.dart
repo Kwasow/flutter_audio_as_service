@@ -6,7 +6,6 @@
 
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'AudioInfoClass.dart';
 
@@ -18,7 +17,7 @@ class FlutterAudioAsService {
 
   // invoke Flutter from 
   
-  /// Let's the service send callbacks to Flutter ex. for interface updates.
+  /// Lets the service send callbacks to Flutter ex. for interface updates.
   /// It's important to remove listeners in onDestroy() (not implemented)
   static void setListeners(AudioPlayerListener listener) {
     _audioListener = listener;
@@ -71,7 +70,7 @@ class FlutterAudioAsService {
 
   /// Starts the service, playback and sends a notification with given details
   /// This command has to be run before any other. The service will stop on itself when playback is done
-  /// Feel free to set albumCoverUrl to any online url you want
+  /// For more details about AudioInfo see the corresponding doc section
   static Future<void> init(AudioInfo details) async {
     String checkIfNull(String toCheck) {
       if (toCheck == null) {

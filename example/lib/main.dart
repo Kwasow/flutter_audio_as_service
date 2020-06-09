@@ -24,7 +24,8 @@ class _MyAppState extends State<MyApp> {
     "Title", // Title
     "Author", // Artist
     "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3", // Audio location (hhtps:// or file:///)
-    "https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg", // Album cover (https:// or file:///)
+    //"https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg", // Album cover (https:// or file:///)
+    "file:///data/user/0/net.tailosive.flutter_audio_as_service_example/app_flutter/10947344.jpeg",
     "app_icon" // Notification icon (drawable)
   );
 
