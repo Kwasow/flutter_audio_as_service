@@ -1,6 +1,9 @@
+# flutter_audio_service
+
 A Flutter plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
 Licensed under the BSD License
 
+**This package was first released as flutter_audio_as_service, but was later renamed because of issues with pub.dev**
 
 The plugin is Android only as of now.
 
