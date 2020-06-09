@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/FlutterAudioPlugin.iml" filepath="$PROJECT_DIR$/.idea/FlutterAudioPlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flutter_audio_as_service.iml" filepath="$PROJECT_DIR$/flutter_audio_as_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/flutter_audio_as_service_android.iml" filepath="$PROJECT_DIR$/android/flutter_audio_as_service_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/android/flutter_audio_as_service_example_android.iml" filepath="$PROJECT_DIR$/example/android/flutter_audio_as_service_example_android.iml" />
     </modules>
   </component>
 </project>

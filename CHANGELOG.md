@@ -4,6 +4,7 @@
  - Implementation changes
  - Tested offline audio and albumCover source
  - Added abbility to set a different albumCover for each song
+ - Updated everything to be on par with how things are done now
 
 ## 0.2.1
  

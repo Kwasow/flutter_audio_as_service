@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 
 import 'AudioInfoClass.dart';
 
-/// A library to simply start an Android audio service with notification and controll it
+/// A library to simply start an Android audio service with notification and control it
 class FlutterAudioAsService {
   static const MethodChannel _nativeChannel =
       const MethodChannel("AudioService");
@@ -141,6 +141,11 @@ class FlutterAudioAsService {
 
   static Future<void> _checkIfBound() async {
     await _nativeChannel.invokeMethod("checkIfBound");
+  }
+
+  static Future<String> get platformVersion async {
+    final String version = await _nativeChannel.invokeMethod('getPlatformVersion');
+    return version;
   }
 }
 

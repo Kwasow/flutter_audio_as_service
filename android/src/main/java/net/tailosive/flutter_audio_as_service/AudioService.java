@@ -53,7 +53,6 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.pluginRegistrar;
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.methodChannel;
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.isBound;
 import static net.tailosive.flutter_audio_as_service.FlutterAudioAsServicePlugin.audioService;
@@ -184,10 +183,10 @@ public class AudioService extends Service {
     );
 
     if (!(intent.getStringExtra("appIcon") == null)) {
-      playerNotificationManager.setSmallIcon(pluginRegistrar.context().getResources().getIdentifier(
+      playerNotificationManager.setSmallIcon(context.getResources().getIdentifier(
               intent.getStringExtra("appIcon"),
               "drawable",
-              pluginRegistrar.context().getPackageName()
+              context.getPackageName()
       ));
     }
     playerNotificationManager.setUseStopAction(true);
