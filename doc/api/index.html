@@ -4,19 +4,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="generator" content="made with love by dartdoc 0.28.4">
+  <meta name="generator" content="made with love by dartdoc 0.30.3">
   <meta name="description" content="flutter_audio_as_service API docs, for the Dart programming language.">
   <title>flutter_audio_as_service - Dart API docs</title>
 
+  
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-  
+
 </head>
 
-<body>
+<body data-base-href=""
+      data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
@@ -47,6 +49,7 @@
     <h5 class="hidden-xs"><span class="package-name">flutter_audio_as_service</span> <span class="package-kind">package</span></h5>
     <ol>
           <li class="section-title">Libraries</li>
+          <li><a href="AudioInfoClass/AudioInfoClass-library.html">AudioInfoClass</a></li>
           <li><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></li>
     </ol>
   </div>
@@ -55,7 +58,6 @@
       <section class="desc markdown">
         <p>A Flutter plugin by Tailosive Development (@TailosiveDev) created by Karol Wąsowski (@KarolWasowski)
 Licensed under the BSD License</p>
-<p>We are now accepting feature and pull requests.</p>
 <p>The plugin is Android only as of now.</p>
 <h1 id="1-before-you-begin">1. Before you begin</h1>
 <p>Add this permission to AndroidManifest.xml:</p>
@@ -81,10 +83,23 @@ Licensed under the BSD License</p>
 </code></pre>
 <h1 id="2-usage">2. Usage</h1>
 <p>To start playback initialize the player with the following:</p>
-<pre class="language-dart"><code class="language-dart">FlutterAudioAsService.init("Title", "Author", audioSource, appIcon, albumCover);
+<pre class="language-dart"><code class="language-dart">AudioInfo info = AudioInfo(
+  "Title",
+  "Author",
+  audioUrl,
+  coverUrl,
+  drawableAppIcon
+)
+
+FlutterAudioAsService.init(info);
 </code></pre>
-<p>audioSource is a string - could be both a url or a file directory.</p>
-<p>How to properly set appIcon and albumCover:</p><ul><li>put the desired .png image into android/src/main/res/drawable/</li><li>if your resource is app_icon.png then set the appIcon value to be "app_icon"</li><li>the value can be null</li></ul>
+<p>audioUrl and coverUrl are strings - could be both urls or a file directories (file:///)</p>
+<p>How to properly set appIcon</p>
+<ul>
+<li>put the desired .png image into android/src/main/res/drawable/</li>
+<li>if your resource is app_icon.png then set the appIcon value to be "app_icon"</li>
+<li>the value can be null</li>
+</ul>
 <p>If you wish you can set event listeners as follows:</p>
 <pre class="language-dart"><code class="language-dart">AudioPlayerListener listener = AudioPlayerListener(
   onPlayerStateChanged: (PlayerState playerState) {
@@ -118,12 +133,19 @@ FlutterAudioAsService.seekTo(Duration(minutes: 15, seconds: 47));
         <section class="summary">
             <h2>Libraries</h2>
           <dl>
+            <dt id="AudioInfoClass">
+              <span class="name"><a href="AudioInfoClass/AudioInfoClass-library.html">AudioInfoClass</a></span>             
+            </dt>
+            <dd>
+               
+            </dd>
             <dt id="flutter_audio_as_service">
               <span class="name"><a href="flutter_audio_as_service/flutter_audio_as_service-library.html">flutter_audio_as_service</a></span>             
             </dt>
             <dd>
-              
-            </dd>          </dl>
+               
+            </dd>
+          </dl>
         </section>
 
   </div> <!-- /.main-content -->
@@ -135,10 +157,10 @@ FlutterAudioAsService.seekTo(Duration(minutes: 15, seconds: 47));
 
 <footer>
   <span class="no-break">
-    flutter_audio_as_service 0.2.1
+    flutter_audio_as_service
+      0.2.1
   </span>
 
-  
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
