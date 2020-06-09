@@ -21,13 +21,11 @@ class _MyAppState extends State<MyApp> {
 
   // See docs to find details about how to add fallback images and app icon
   AudioInfo trackDetails = AudioInfo(
-    "Title",
-    "Author",
-    "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3",
-    null,
-    "https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg",
-    null,
-    "app_icon"
+    "Title", // Title
+    "Author", // Artist
+    "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3", // Audio location (hhtps:// or file:///)
+    "https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg", // Album cover (https:// or file:///)
+    "app_icon" // Notification icon (drawable)
   );
 
   Future<void> setAudioLength() async {
