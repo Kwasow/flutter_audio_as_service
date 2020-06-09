@@ -103,8 +103,7 @@ public class FlutterAudioAsServicePlugin implements MethodCallHandler {
           } else {
             serviceIntent.putExtra("bigIcon", (String) null);
           }
-*/
-          serviceIntent.putExtra("bigIcon", bigIcon);
+*/          serviceIntent.putExtra("bigIcon", bigIcon);
           serviceIntent.putExtra("title", title);
           serviceIntent.putExtra("channel", channel);
           serviceIntent.putExtra("url", url);

@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   AudioInfo trackDetails = AudioInfo(
     "Title",
     "Author",
-    "https://feeds.soundcloud.com/stream/655083446-tailosivecast-ep-054-series-finale.m4a",
+    "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3",
     null,
     "https://scdn.androidcommunity.com/wp-content/uploads/2018/02/flutter.jpeg",
     null,

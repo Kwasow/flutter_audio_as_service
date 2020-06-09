@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/flutter_audio_as_service.iml" filepath="$PROJECT_DIR$/flutter_audio_as_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flutter_audio_as_service.iml" filepath="$PROJECT_DIR$/flutter_audio_as_service.iml" group="flutter_audio_as_service" />
     </modules>
   </component>
 </project>
