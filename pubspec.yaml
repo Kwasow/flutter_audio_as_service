@@ -1,6 +1,6 @@
 name: flutter_audio_service
 description: A plugin, that allows audio playback as Android service, uses ExoPlayer and implements MediaSession API.
-version: 0.3.0
+version: 0.3.1
 homepage: https://github.com/Kwasow/flutter_audio_as_service
 
 environment:

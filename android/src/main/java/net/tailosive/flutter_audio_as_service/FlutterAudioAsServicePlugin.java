@@ -1,6 +1,6 @@
 //
 //  Flutter plugin for audio playback on Android
-//  Created by Karol Wąsowski (karol@tailosive.net) on June 23rd 2019
+//  Created by Karol Wąsowski (wasowski02@gmail.com) on June 23rd 2019
 //  Licensed under the BSD License
 //
 

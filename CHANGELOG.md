@@ -1,3 +1,7 @@
+## 0.3.1
+
+ - **Renamed plugin to flutter_audio_service** - setup is still the same
+
 ## 0.3.0
 
  - Bug fixes

@@ -1,3 +1,9 @@
+//
+//  Flutter plugin for audio playback on Android
+//  Created by Karol Wąsowski (wasowski02@gmail.com) on January 21st 2019
+//  Licensed under the BSD License
+//
+
 class AudioInfo {
   String title;
   String artist;
