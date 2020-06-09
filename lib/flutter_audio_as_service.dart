@@ -92,7 +92,7 @@ class FlutterAudioAsService {
   }
 
   /// Stops and destroys the service. [init()] has to be run after this one, if you want to start playback again
-  /// This also runs [onPlayerCompleted()] to free resources
+  /// This also runs [AudioPlayerListener.onPlayerCompleted()] to free resources
   static Future<void> stop() async {
     await _checkIfBound();
     await _nativeChannel.invokeMethod("stop");
@@ -149,11 +149,11 @@ class FlutterAudioAsService {
   }
 }
 
-/// Player states returned by the [onPlayerStateChanged()] callback
+/// Player states returned by the [AudioPlayerListener.onPlayerStateChanged()] callback
 enum PlayerState { idle, loading, playing, paused }
 
 /// A class to simplify the usage of callbacks. Specify the needed callbacks and pass the listener to
-/// [setListeners()]
+/// [FlutterAudioAsService.setListeners()]
 class AudioPlayerListener {
   AudioPlayerListener({
     Function onPlayerStateChanged,

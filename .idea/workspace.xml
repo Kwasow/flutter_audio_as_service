@@ -5,133 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0beccff-58e7-4a81-a6d4-4798e2a57087" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FlutterAudioPlugin.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/caches/gradle_models.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.settings/org.eclipse.buildship.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/net/tailosive/flutter_audio_as_service/AudioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/net/tailosive/flutter_audio_as_service/AudioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/net/tailosive/flutter_audio_as_service/FlutterAudioAsServicePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/net/tailosive/flutter_audio_as_service/FlutterAudioAsServicePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo-class.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/AudioInfo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/albumCoverFallback.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/albumCoverUrl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/appIcon.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/artist.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/hashCode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/localFile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/noSuchMethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/operator_equals.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/runtimeType.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/title.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/toString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfo/url.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/AudioInfoClass/AudioInfoClass-library.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/__404error.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/categories.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener-class.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/AudioPlayerListener.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/hashCode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/noSuchMethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/onPlayerCompleted.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/onPlayerPositionChanged.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/onPlayerStateChanged.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/operator_equals.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/runtimeType.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/AudioPlayerListener/toString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService-class.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/FlutterAudioAsService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/getAudioLength.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/hashCode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/init.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/noSuchMethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/operator_equals.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/pause.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/resume.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/runtimeType.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/seekBy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/seekTo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/setListeners.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/stop.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/toString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/FlutterAudioAsService/unbind.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/PlayerState-class.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/PlayerState/hashCode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/PlayerState/noSuchMethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/PlayerState/operator_equals.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/PlayerState/runtimeType.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/PlayerState/toString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/flutter_audio_as_service/flutter_audio_as_service-library.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/index.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/URI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/github.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/highlight.pack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/play_button.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/sdk_footer_text.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/sdk_footer_text.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/static-assets/typeahead.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/example/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/example/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/example/.metadata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/.settings/org.eclipse.buildship.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/.settings/org.eclipse.buildship.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/java/net/tailosive/flutter_audio_as_service_example/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/java/net/tailosive/flutter_audio_as_service_example/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/AppDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/AppDelegate.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ios/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/flutter_audio_as_service.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/ios/flutter_audio_as_service.podspec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/flutter_audio_as_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_audio_as_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/flutter_audio_as_service_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/flutter_audio_as_service_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="6c03fbb7d440" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="4.7_WXGA_API_29" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -143,6 +25,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
