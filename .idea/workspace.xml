@@ -4,11 +4,16 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c0beccff-58e7-4a81-a6d4-4798e2a57087" name="Default Changelist" comment="" />
+    <list default="true" id="c0beccff-58e7-4a81-a6d4-4798e2a57087" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/test/flutter_audio_as_service_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/flutter_audio_as_service_test.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="4.7_WXGA_API_29" />
   <component name="Git.Settings">
